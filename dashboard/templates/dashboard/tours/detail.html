@@ -1,0 +1,143 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>
+    {{ tour.title }}
+</h2>
+
+<p>
+    کد تور: {{ tour.tour_code }}
+</p>
+
+<p>
+    مقصد: {{ tour.destination }}
+</p>
+
+<p>
+    تاریخ حرکت: {{ tour.departure_date }}
+</p>
+
+<p>
+    تاریخ برگشت: {{ tour.return_date }}
+</p>
+
+<hr>
+
+<h3>پروازهای تور</h3>
+
+<a href="{% url 'dashboard:add_tour_flight' tour.id %}">
+    افزودن پرواز
+</a>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+    <th>مسیر</th>
+    <th>ترتیب</th>
+    <th>عملیات</th>
+</tr>
+
+{% for flight in flights %}
+
+<tr>
+
+    <td>
+        {{ flight.flight }}
+    </td>
+
+    <td>
+        {{ flight.order }}
+    </td>
+
+    <td>
+
+    <a href="{% url 'dashboard:edit_tour_flight' flight.id %}">
+        ویرایش
+    </a>
+
+    |
+
+    <a href="{% url 'dashboard:delete_tour_flight' flight.id %}">
+        حذف
+    </a>
+
+</td>
+
+</tr>
+
+
+
+{% empty %}
+
+<tr>
+
+    <td colspan="2">
+        پروازی ثبت نشده
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<hr>
+
+<h3>اقامتگاه‌های تور</h3>
+
+<a href="{% url 'dashboard:add_tour_accommodation' tour.id %}">
+    افزودن اقامتگاه
+</a>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+    <th>نام اقامتگاه</th>
+    <th>تعداد شب</th>
+    <th>عملیات</th>
+</tr>
+
+{% for accommodation in accommodations %}
+
+<tr>
+
+    <td>
+        {{ accommodation.accommodation }}
+    </td>
+
+    <td>
+        {{ accommodation.nights }}
+    </td>
+
+    <td>
+
+    <a href="{% url 'dashboard:edit_tour_accommodation' accommodation.id %}">
+        ویرایش
+    </a>
+
+    |
+
+    <a href="{% url 'dashboard:delete_tour_accommodation' accommodation.id %}">
+        حذف
+    </a>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+    <td colspan="2">
+        اقامتگاهی ثبت نشده
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

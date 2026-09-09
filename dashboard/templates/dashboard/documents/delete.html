@@ -1,0 +1,41 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+حذف مدرک
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+حذف مدرک
+
+</h2>
+
+<p>
+
+آیا از حذف مدرک
+
+<strong>
+
+{{ document.title }}
+
+</strong>
+
+مطمئن هستید؟
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <button type="submit">
+
+        حذف
+
+    </button>
+
+</form>
+
+{% endblock %}

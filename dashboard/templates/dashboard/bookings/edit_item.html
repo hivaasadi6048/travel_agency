@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+ویرایش خدمت رزرو
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+ویرایش خدمت رزرو
+
+</h2>
+
+<hr>
+
+<p>
+
+رزرو:
+
+{{ item.booking.booking_code }}
+
+</p>
+
+<p>
+
+نوع خدمت:
+
+{{ item.get_item_type_display }}
+
+</p>
+
+<hr>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        ذخیره تغییرات
+
+    </button>
+
+</form>
+
+<br>
+
+<a href="{% url 'dashboard:booking_detail' item.booking.id %}">
+
+بازگشت به رزرو
+
+</a>
+
+{% endblock %}

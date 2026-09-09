@@ -1,0 +1,528 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+پروفایل مسافر
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-header">
+
+    <div>
+
+        <h2>
+            {{ passenger.first_name }}
+            {{ passenger.last_name }}
+        </h2>
+
+        <p class="profile-code">
+            کد مشتری:
+            {{ passenger.customer_code }}
+        </p>
+
+    </div>
+
+    <a class="btn-edit"
+       href="{% url 'dashboard:passenger_edit' passenger.id %}">
+        ✏️ ویرایش اطلاعات
+    </a>
+
+</div>
+
+<hr>
+
+<div class="info-card">
+
+    <h3>اطلاعات مسافر</h3>
+
+    <div class="info-grid">
+
+        <div>
+            <strong>کد مشتری:</strong>
+            {{ passenger.customer_code }}
+        </div>
+
+        <div>
+            <strong>تلفن:</strong>
+            {{ passenger.phone }}
+        </div>
+
+        <div>
+            <strong>ایمیل:</strong>
+            {{ passenger.email }}
+        </div>
+
+    </div>
+
+</div>
+
+<hr>
+
+<div class="info-card">
+
+    <h3>اطلاعات پاسپورت</h3>
+
+    {% if passport %}
+
+    <div class="info-grid">
+
+        <div>
+            <strong>شماره پاسپورت:</strong>
+            {{ passport.passport_number }}
+        </div>
+
+        <div>
+            <strong>کشور صادرکننده:</strong>
+            {{ passport.country }}
+        </div>
+
+        <div>
+            <strong>تاریخ صدور:</strong>
+            {{ passport.issue_date }}
+        </div>
+
+        <div>
+            <strong>تاریخ انقضا:</strong>
+            {{ passport.expiry_date }}
+        </div>
+
+    </div>
+
+    <br>
+
+    {% if passport.days_to_expire < 0 %}
+
+    <div class="alert-danger">
+        ❌ پاسپورت منقضی شده است
+    </div>
+
+    {% elif passport.days_to_expire <= 180 %}
+
+    <div class="alert-warning">
+        ⚠ کمتر از ۶ ماه اعتبار باقی مانده است
+    </div>
+
+    {% endif %}
+
+    <br>
+
+    <a class="btn-edit"
+       href="{% url 'dashboard:edit_passport' passport.id %}">
+        ✏️ ویرایش پاسپورت
+    </a>
+
+    <a class="btn-delete"
+       href="{% url 'dashboard:delete_passport' passport.id %}">
+        🗑 حذف پاسپورت
+    </a>
+
+    {% else %}
+
+    <p>
+        اطلاعات پاسپورت ثبت نشده است.
+    </p>
+
+    <a class="btn-add"
+       href="{% url 'dashboard:add_passport' passenger.id %}">
+        ➕ ثبت پاسپورت
+    </a>
+
+    {% endif %}
+
+</div>
+
+<hr>
+
+<div class="info-card">
+
+    <h3>تصاویر پاسپورت</h3>
+
+    <div class="documents-grid">
+
+        {% for document in passport_documents %}
+
+        <div class="document-card">
+
+            <strong>
+                {{ document.title }}
+            </strong>
+
+            <br><br>
+
+            <a href="{{ document.file.url }}" target="_blank">
+
+                <img
+                    src="{{ document.file.url }}"
+                    class="document-image"
+                >
+
+            </a>
+
+            <br><br>
+
+            <a class="btn-edit"
+            href="{% url 'dashboard:edit_document' document.id %}">
+                ویرایش
+            </a>
+
+          
+
+            <a class="btn-delete"
+             href="{% url 'dashboard:delete_document' document.id %}">
+                حذف
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>
+            هیچ تصویر پاسپورتی ثبت نشده است.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<hr>
+
+<h3>
+
+رزروها
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>کد رزرو</th>
+
+    <th>مبلغ کل</th>
+
+    <th>پرداخت شده</th>
+
+    <th>باقی‌مانده</th>
+
+    <th>عملیات</th>
+
+</tr>
+
+{% for booking in bookings %}
+
+<tr>
+
+    <td>
+
+        {{ booking.booking_code }}
+
+    </td>
+
+    <td>
+
+        {{ booking.total_price }}
+
+    </td>
+
+    <td>
+
+        {{ booking.paid_amount }}
+
+    </td>
+
+    <td>
+
+        {{ booking.remaining_amount }}
+
+    </td>
+
+    <td>
+
+        <a href="{% url 'dashboard:booking_detail' booking.id %}">
+            مشاهده
+        </a>
+
+        <a href="{% url 'dashboard:delete_booking' booking.id %}">
+         حذف
+        </a>
+
+        {% if booking.remaining_amount > 0 %}
+
+            |
+
+            <a href="{% url 'dashboard:add_payment' passenger.id %}">
+                پرداخت
+            </a>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+    <td colspan="5">
+
+        هیچ رزروی ثبت نشده است
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<hr>
+
+<h3>
+
+پرداخت‌های ثبت شده
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>تاریخ</th>
+
+    <th>مبلغ</th>
+
+    <th>روش پرداخت</th>
+
+</tr>
+
+{% for payment in payments %}
+
+<tr>
+
+    <td>
+
+        {{ payment.paid_at|date:"Y/m/d H:i" }}
+
+    </td>
+
+    <td>
+
+        {{ payment.amount }}
+
+    </td>
+
+    <td>
+
+        {{ payment.get_payment_method_display }}
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+    <td colspan="3">
+
+        پرداختی ثبت نشده است
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<hr>
+
+<h3>
+
+مدارک مسافر
+
+</h3>
+
+<a href="{% url 'dashboard:add_document' passenger.id %}">
+➕ افزودن مدرک
+</a>
+
+<br><br>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>عنوان</th>
+    <th>نوع مدرک</th>
+    <th>فایل</th>
+    <th>تاریخ ثبت</th>
+    <th>عملیات</th>
+
+</tr>
+
+{% for document in other_documents %}
+
+<tr>
+
+    <td>
+
+        {{ document.title }}
+
+    </td>
+
+    <td>
+
+        {{ document.get_document_type_display }}
+
+    </td>
+
+    <td>
+
+    {% with document.file.url|lower as file_url %}
+
+        {% if '.jpg' in file_url or '.jpeg' in file_url or '.png' in file_url or '.webp' in file_url %}
+
+            <a href="{{ document.file.url }}" target="_blank">
+
+                <img
+                    src="{{ document.file.url }}"
+                    width="120"
+                    style="border-radius:8px;"
+                >
+
+            </a>
+
+        {% else %}
+
+            <a href="{{ document.file.url }}" target="_blank">
+
+                 مشاهده فایل
+
+            </a>
+
+        {% endif %}
+
+    {% endwith %}
+
+</td>
+
+<td>
+
+{% if document.document_type == 'passport_image' %}
+
+    {% if passenger.passport %}
+
+        {{ passenger.passport.expiry_date }}
+
+        {% if passenger.passport.days_to_expire < 0 %}
+
+            <br>
+
+            <span style="color:red;font-weight:bold;">
+
+                منقضی شده
+
+            </span>
+
+        {% elif passenger.passport.days_to_expire <= 180 %}
+
+            <br>
+
+            <span style="color:orange;font-weight:bold;">
+
+                کمتر از ۶ ماه اعتبار
+
+            </span>
+
+        {% endif %}
+
+    {% else %}
+
+        ----
+
+    {% endif %}
+
+{% else %}
+
+    {% if document.expiry_date %}
+
+        {{ document.expiry_date }}
+
+        {% if document.days_to_expire < 0 %}
+
+            <br>
+
+            <span style="color:red;font-weight:bold;">
+
+                منقضی شده
+
+            </span>
+
+        {% elif document.days_to_expire <= 30 %}
+
+            <br>
+
+            <span style="color:orange;font-weight:bold;">
+
+                نزدیک به انقضا
+
+            </span>
+
+        {% endif %}
+
+    {% else %}
+
+        ----
+
+    {% endif %}
+
+{% endif %}
+
+</td>
+
+    <td>
+
+        <a href="{% url 'dashboard:edit_document' document.id %}">
+            ویرایش
+        </a>
+
+        |
+
+        <a href="{% url 'dashboard:delete_document' document.id %}">
+            حذف
+        </a>
+
+        |
+
+        <a href="{{ document.file.url }}" target="_blank">
+
+        دانلود
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+    <td colspan="5">
+
+        مدرکی ثبت نشده است
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

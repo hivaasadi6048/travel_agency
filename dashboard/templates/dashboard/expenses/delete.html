@@ -1,0 +1,35 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>
+
+حذف هزینه
+
+</h2>
+
+<p>
+
+آیا از حذف این هزینه مطمئن هستید؟
+
+</p>
+
+<p>
+
+{{ expense.title }}
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <button type="submit">
+
+        حذف
+
+    </button>
+
+</form>
+
+{% endblock %}

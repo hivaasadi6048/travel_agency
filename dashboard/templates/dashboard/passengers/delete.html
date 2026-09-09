@@ -1,0 +1,38 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+حذف مسافر
+{% endblock %}
+
+{% block content %}
+
+<h2>حذف مسافر</h2>
+
+<p>
+
+آیا از حذف
+
+<strong>
+
+{{ passenger.first_name }}
+{{ passenger.last_name }}
+
+</strong>
+
+مطمئن هستید؟
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <button type="submit">
+
+        حذف
+
+    </button>
+
+</form>
+
+{% endblock %}

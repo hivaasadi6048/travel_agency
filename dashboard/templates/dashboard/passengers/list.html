@@ -1,0 +1,78 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+مسافران
+{% endblock %}
+
+{% block content %}
+
+<h2>لیست مسافران</h2>
+
+<form method="get">
+
+    <input type="text"
+           name="q"
+           placeholder="جستجو..."
+           value="{{ query|default_if_none:'' }}">
+
+    <button type="submit">
+        جستجو
+    </button>
+
+</form>
+
+<a href="{% url 'dashboard:passenger_create' %}">
+    ➕ مسافر جدید
+</a>
+
+<br><br>
+
+<br>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+        <th>کد مشتری</th>
+        <th>نام</th>
+        <th>نام خانوادگی</th>
+        <th>تلفن</th>
+        <th>ایمیل</th>
+        <th>عملیات</th>
+    </tr>
+
+    {% for p in passengers %}
+
+    <tr>
+        <td>{{ p.customer_code }}</td>
+        <td>{{ p.first_name }}</td>
+        <td>{{ p.last_name }}</td>
+        <td>{{ p.phone }}</td>
+        <td>{{ p.email }}</td>
+        <td>
+        <a href="{% url 'dashboard:passenger_detail' p.id %}">
+         مشاهده
+        </a>
+        
+        <a href="{% url 'dashboard:passenger_edit' p.id %}">
+         ویرایش
+        </a>
+
+        <a href="{% url 'dashboard:delete_passenger' p.id %}">
+        حذف
+        </a>
+        </td>
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="5">
+            هیچ مسافری یافت نشد
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

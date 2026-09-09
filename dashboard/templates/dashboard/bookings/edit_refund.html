@@ -1,0 +1,25 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>
+
+ویرایش استرداد
+
+</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        ذخیره
+
+    </button>
+
+</form>
+
+{% endblock %}

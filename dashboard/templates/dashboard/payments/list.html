@@ -1,0 +1,47 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>لیست پرداخت‌ها</h2>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+        <th>مسافر</th>
+        <th>رزرو</th>
+        <th>مبلغ</th>
+        <th>روش پرداخت</th>
+        <th>تاریخ</th>
+    </tr>
+
+    {% for payment in payments %}
+
+    <tr>
+
+        <td>
+            {{ payment.booking.passenger }}
+        </td>
+
+        <td>
+            {{ payment.booking.booking_code }}
+        </td>
+
+        <td>
+            {{ payment.amount }}
+        </td>
+
+        <td>
+            {{ payment.get_payment_method_display }}
+        </td>
+
+        <td>
+            {{ payment.paid_at|date:"Y/m/d H:i" }}
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

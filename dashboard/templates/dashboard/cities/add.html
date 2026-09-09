@@ -1,0 +1,19 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>افزودن شهر</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        ذخیره
+    </button>
+
+</form>
+
+{% endblock %}

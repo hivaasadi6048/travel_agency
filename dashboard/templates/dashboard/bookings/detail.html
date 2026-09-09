@@ -1,0 +1,282 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+جزئیات رزرو
+{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'dashboard:edit_booking' booking.id %}">
+✏️ ویرایش رزرو
+</a>
+
+<hr>
+
+<h2>{{ booking.booking_code }}</h2>
+
+<p>
+مسافر:
+{{ booking.passenger }}
+</p>
+
+<p>
+وضعیت:
+{{ booking.get_status_display }}
+</p>
+
+<p>
+مبلغ کل:
+{{ booking.total_price }}
+</p>
+
+<p>
+پرداخت شده:
+{{ booking.paid_amount }}
+</p>
+
+<p>
+باقی‌مانده:
+{{ booking.remaining_amount }}
+</p>
+
+<hr>
+
+<h3>گزارش مالی رزرو</h3>
+
+<p>
+درآمد رزرو:
+{{ booking.actual_total_price }}
+</p>
+
+<p>
+هزینه‌های رزرو:
+{{ booking_expenses }}
+</p>
+
+<p>
+سود رزرو:
+{{ booking_profit }}
+</p>
+
+<hr>
+
+<h3>هزینه‌های ثبت شده</h3>
+
+<a href="{% url 'dashboard:add_booking_expense' booking.id %}">
+➕ ثبت هزینه برای این رزرو
+</a>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+        <th>عنوان</th>
+        <th>دسته</th>
+        <th>مبلغ</th>
+    </tr>
+
+    {% for expense in booking.expenses.all %}
+
+    <tr>
+        <td>{{ expense.title }}</td>
+        <td>{{ expense.get_category_display }}</td>
+        <td>{{ expense.amount }}</td>
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="3">
+            هزینه‌ای ثبت نشده است
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+<hr>
+
+<h3>خدمات رزرو شده</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+        <th>نوع خدمت</th>
+        <th>شرح خدمت</th>
+        <th>قیمت توافقی</th>
+        <th>استرداد</th>
+        <th>قیمت نهایی</th>
+        <th>عملیات</th>
+    </tr>
+
+    {% for item in booking.items.all %}
+
+    <tr>
+
+        <td>{{ item.get_item_type_display }}</td>
+
+        <td>
+
+            {% if item.tour %}
+                {{ item.tour.title }}
+
+            {% elif item.flight %}
+                {{ item.flight }}
+
+            {% elif item.accommodation %}
+                {{ item.accommodation.name }}
+
+            {% elif item.visa %}
+                {{ item.visa }}
+
+            {% endif %}
+
+        </td>
+
+        <td>{{ item.price }}</td>
+
+        <td>{{ item.refunded_amount }}</td>
+
+        <td>{{ item.final_price }}</td>
+
+        <td>
+
+            <a href="{% url 'dashboard:edit_booking_item' item.id %}">
+                ویرایش
+            </a>
+
+            |
+
+            <a href="{% url 'dashboard:delete_booking_item' item.id %}">
+                حذف
+            </a>
+
+            |
+
+            <a href="{% url 'dashboard:add_refund' item.id %}">
+                ثبت استرداد
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="6">
+
+            هنوز خدمتی ثبت نشده است
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+<hr>
+
+<a href="{% url 'dashboard:add_tour_to_booking' booking.id %}">
+➕ افزودن تور
+</a>
+
+<br><br>
+
+<a href="{% url 'dashboard:add_flight_to_booking' booking.id %}">
+➕ افزودن پرواز
+</a>
+
+<br><br>
+
+<a href="{% url 'dashboard:add_accommodation_to_booking' booking.id %}">
+➕ افزودن اقامتگاه
+</a>
+
+<br><br>
+
+<a href="{% url 'dashboard:add_visa_to_booking' booking.id %}">
+➕ افزودن ویزا
+</a>
+
+<hr>
+
+<h3>تاریخچه استردادها</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+        <th>خدمت</th>
+        <th>مبلغ استرداد</th>
+        <th>دلیل</th>
+        <th>تاریخ</th>
+        <th>عملیات</th>
+    </tr>
+
+    {% for item in booking.items.all %}
+
+        {% for refund in item.refunds.all %}
+
+        <tr>
+
+            <td>
+
+                {% if item.tour %}
+                    {{ item.tour.title }}
+
+                {% elif item.flight %}
+                    {{ item.flight }}
+
+                {% elif item.accommodation %}
+                    {{ item.accommodation.name }}
+
+                {% elif item.visa %}
+                    {{ item.visa }}
+
+                {% endif %}
+
+            </td>
+
+            <td>{{ refund.amount }}</td>
+
+            <td>{{ refund.reason }}</td>
+
+            <td>{{ refund.created_at }}</td>
+
+            <td>
+
+                <a href="{% url 'dashboard:edit_refund' refund.id %}">
+                    ویرایش
+                </a>
+
+                |
+
+                <a href="{% url 'dashboard:delete_refund' refund.id %}">
+                    حذف
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="5">
+
+            هنوز هیچ استردادی ثبت نشده است.
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

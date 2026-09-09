@@ -1,0 +1,355 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+گزارش مالی
+{% endblock %}
+
+{% block content %}
+
+<hr>
+
+<a href="{% url 'dashboard:financial_report_excel' %}">
+
+<h3>📊 دانلود گزارش اکسل<h3>
+
+</a>
+
+<hr>
+
+<h3>
+
+خلاصه وضعیت مالی
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>تعداد بدهکاران</th>
+
+    <th>مجموع بدهی</th>
+
+    <th>بیشترین بدهی</th>
+
+</tr>
+
+<tr>
+
+    <td>
+
+        {{ debtor_count }}
+
+    </td>
+
+    <td>
+
+        {{ total_debt }}
+
+    </td>
+
+    <td>
+
+        {{ largest_debt }}
+
+    </td>
+
+</tr>
+
+</table>
+
+<form method="get">
+
+    از تاریخ:
+
+    <input
+        type="date"
+        name="from_date"
+        value="{{ from_date }}"
+    >
+
+    تا تاریخ:
+
+    <input
+        type="date"
+        name="to_date"
+        value="{{ to_date }}"
+    >
+
+    <button type="submit">
+
+        نمایش گزارش
+
+    </button>
+
+</form>
+
+<hr>
+<hr>
+
+<h3>
+
+گزارش تحلیلی
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>عنوان</th>
+
+    <th>مقدار</th>
+
+</tr>
+
+<tr>
+
+    <td>درآمد امروز</td>
+
+    <td>{{ today_revenue }}</td>
+
+</tr>
+
+<tr>
+
+    <td>درآمد ماه جاری</td>
+
+    <td>{{ month_revenue }}</td>
+
+</tr>
+
+<tr>
+
+    <td>درآمد سال جاری</td>
+
+    <td>{{ year_revenue }}</td>
+
+</tr>
+
+<tr>
+
+    <td>پرفروش‌ترین خدمت</td>
+
+    <td>{{ best_service }}</td>
+
+</tr>
+
+<tr>
+
+    <td>بیشترین بدهکار</td>
+
+    <td>
+
+        {% if top_debtor %}
+
+            {{ top_debtor.passenger }}
+
+            ({{ top_debtor.remaining_amount }})
+
+        {% else %}
+
+            ندارد
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<hr>
+
+<h2>
+
+گزارش مالی آژانس
+
+</h2>
+
+<hr>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+        <th>شرح</th>
+        <th>مبلغ</th>
+    </tr>
+
+    <tr>
+        <td>درآمد کل</td>
+        <td>{{ total_revenue }}</td>
+    </tr>
+
+    <tr>
+        <td>دریافتی کل</td>
+        <td>{{ total_received }}</td>
+    </tr>
+
+    <tr>
+        <td>بدهی مشتریان</td>
+        <td>{{ total_debt }}</td>
+    </tr>
+
+    <tr>
+        <td>هزینه‌های کل</td>
+        <td>{{ total_expenses }}</td>
+    </tr>
+
+    <tr>
+        <td>سود خالص</td>
+        <td>{{ total_profit }}</td>
+    </tr>
+
+</table>
+
+<hr>
+
+<h3>
+
+لیست بدهکاران
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+
+        <th>کد رزرو</th>
+
+        <th>مسافر</th>
+
+        <th>بدهی</th>
+
+        <th>مشاهده</th>
+
+    </tr>
+
+    {% for booking in debtors %}
+
+    <tr>
+
+        <td>
+
+            {{ booking.booking_code }}
+
+        </td>
+
+        <td>
+
+            {{ booking.passenger }}
+
+        </td>
+
+        <td>
+
+            {{ booking.remaining_amount }}
+
+        </td>
+
+        <td>
+
+            <a href="{% url 'dashboard:booking_detail' booking.id %}">
+                مشاهده
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="4">
+
+            هیچ بدهکاری وجود ندارد
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+
+<hr>
+
+<h3>
+
+سود هر رزرو
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>کد رزرو</th>
+
+    <th>مسافر</th>
+
+    <th>درآمد</th>
+
+    <th>هزینه</th>
+
+    <th>سود</th>
+
+</tr>
+
+{% for row in booking_profits %}
+
+<tr>
+
+    <td>
+
+        {{ row.booking.booking_code }}
+
+    </td>
+
+    <td>
+
+        {{ row.booking.passenger }}
+
+    </td>
+
+    <td>
+
+        {{ row.revenue }}
+
+    </td>
+
+    <td>
+
+        {{ row.expense }}
+
+    </td>
+
+    <td>
+
+        {{ row.profit }}
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+    <td colspan="5">
+
+        اطلاعاتی وجود ندارد
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

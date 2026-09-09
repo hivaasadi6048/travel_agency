@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+ویرایش مدرک
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+ویرایش مدرک
+
+</h2>
+
+<form method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        ذخیره تغییرات
+
+    </button>
+
+</form>
+
+{% endblock %}

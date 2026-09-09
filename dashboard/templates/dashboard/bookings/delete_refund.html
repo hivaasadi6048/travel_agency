@@ -1,0 +1,35 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>
+
+حذف استرداد
+
+</h2>
+
+<p>
+
+آیا از حذف این استرداد مطمئن هستید؟
+
+</p>
+
+<p>
+
+{{ refund.amount }}
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <button type="submit">
+
+        حذف
+
+    </button>
+
+</form>
+
+{% endblock %}

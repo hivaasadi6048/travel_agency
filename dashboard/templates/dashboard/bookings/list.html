@@ -1,0 +1,138 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+رزروها
+{% endblock %}
+
+{% block content %}
+
+<form method="get">
+
+    <input
+        type="text"
+        name="q"
+        placeholder="جستجوی رزرو..."
+        value="{{ query|default_if_none:''  }}"
+    >
+
+    <button type="submit">
+
+        جستجو
+
+    </button>
+
+</form>
+
+<br>
+
+<h2>
+
+لیست رزروها
+
+</h2>
+
+<a href="{% url 'dashboard:booking_create' %}">
+    ➕ رزرو جدید
+</a>
+
+<br><br>
+
+
+
+
+<table>
+
+    <tr>
+
+        <th>کد رزرو</th>
+
+        <th>مسافر</th>
+
+        <th>نوع خدمات</th>
+
+        <th>مبلغ کل</th>
+
+        <th>باقی‌مانده</th>
+
+        <th>عملیات</th>
+
+    </tr>
+
+    {% for booking in bookings %}
+
+    <tr>
+
+        <td>
+
+            {{ booking.booking_code }}
+
+        </td>
+
+        <td>
+
+            {{ booking.passenger }}
+
+        </td>
+
+        <td>
+
+        {% for item in booking.items.all %}
+
+            {{ item.get_item_type_display }}
+
+            {% if not forloop.last %}
+                ,
+            {% endif %}
+
+        {% empty %}
+
+            -
+
+        {% endfor %}
+
+        </td>
+
+        <td>
+
+            {{ booking.actual_total_price }}
+
+        </td>
+
+        <td>
+
+            {{ booking.remaining_amount }}
+
+        </td>
+
+        <td>
+
+        <a href="{% url 'dashboard:booking_detail' booking.id %}">
+         مشاهده
+         |
+
+        <a href="{% url 'dashboard:delete_booking' booking.id %}">
+         حذف
+        </a>
+
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="5">
+
+            هیچ رزروی ثبت نشده
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

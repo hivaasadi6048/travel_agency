@@ -1,0 +1,31 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>
+
+افزودن پرواز به تور
+
+</h2>
+
+<p>
+
+{{ tour.title }}
+
+</p>
+
+<form method="post">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button type="submit">
+
+ثبت پرواز
+
+</button>
+
+</form>
+
+{% endblock %}

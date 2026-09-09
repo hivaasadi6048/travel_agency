@@ -1,0 +1,67 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>لیست اقامتگاه‌ها</h2>
+
+<p>
+
+    <a href="{% url 'dashboard:add_accommodation' %}">
+        ➕ افزودن اقامتگاه
+    </a>
+
+</p>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+        <th>نام</th>
+        <th>نوع</th>
+        <th>شهر</th>
+        <th>عملیات</th>
+    </tr>
+
+    {% for accommodation in accommodations %}
+
+    <tr>
+
+        <td>
+            {{ accommodation.name }}
+        </td>
+
+        <td>
+            {{ accommodation.get_type_display }}
+        </td>
+
+        <td>
+            {{ accommodation.city }}
+        </td>
+
+        <td>
+
+            <a href="{% url 'dashboard:edit_accommodation' accommodation.id %}">
+                ویرایش
+            </a>
+            |
+
+            <a href="{% url 'dashboard:delete_accommodation' accommodation.id %}">
+             حذف
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="4">
+            اقامتگاهی ثبت نشده است
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

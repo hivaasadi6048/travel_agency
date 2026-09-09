@@ -1,0 +1,99 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+لیست استردادها
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+لیست استردادها
+
+</h2>
+
+<table>
+
+    <tr>
+
+        <th>رزرو</th>
+
+        <th>خدمت</th>
+
+        <th>مبلغ</th>
+
+        <th>دلیل</th>
+
+        <th>تاریخ</th>
+
+        <th>عملیات</th>
+
+    </tr>
+
+    {% for refund in refunds %}
+
+    <tr>
+
+        <td>
+
+            {{ refund.booking_item.booking.booking_code }}
+
+        </td>
+
+        <td>
+
+            {{ refund.booking_item }}
+
+        </td>
+
+        <td>
+
+            {{ refund.amount }}
+
+        </td>
+
+        <td>
+
+            {{ refund.reason }}
+
+        </td>
+
+        <td>
+
+            {{ refund.created_at }}
+
+        </td>
+
+        <td>
+
+            <a href="{% url 'dashboard:edit_refund' refund.id %}">
+                ویرایش
+            </a>
+
+            |
+
+            <a href="{% url 'dashboard:delete_refund' refund.id %}">
+                حذف
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="6">
+
+            هیچ استردادی ثبت نشده است.
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>
+
+حذف رزرو
+
+</h2>
+
+<p>
+
+آیا از حذف رزرو
+
+{{ booking.booking_code }}
+
+مطمئن هستید؟
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <button type="submit">
+
+        حذف
+
+    </button>
+
+</form>
+
+{% endblock %}

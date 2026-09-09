@@ -1,0 +1,64 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+ثبت پرداخت
+{% endblock %}
+
+{% block content %}
+
+{% if error %}
+
+<p style="color:red;">
+    {{ error }}
+</p>
+
+{% endif %}
+
+<h2>
+    ثبت پرداخت برای {{ passenger.first_name }} {{ passenger.last_name }}
+</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <label>انتخاب رزرو:</label>
+    <select name="booking_id">
+
+        {% for b in bookings %}
+
+        <option value="{{ b.id }}">
+            {{ b.booking_code }} -
+            بدهی: {{ b.remaining_amount }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>مبلغ:</label>
+    <input type="number" name="amount">
+
+    <br><br>
+
+    <label>روش پرداخت:</label>
+    <select name="payment_method">
+
+        <option value="cash">نقدی</option>
+        <option value="card">کارت</option>
+        <option value="online">آنلاین</option>
+        <option value="installment">اقساطی</option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        ثبت پرداخت
+    </button>
+
+</form>
+
+{% endblock %}

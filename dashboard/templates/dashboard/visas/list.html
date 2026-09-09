@@ -1,0 +1,62 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>لیست ویزاها</h2>
+
+<p>
+
+    <a href="{% url 'dashboard:add_visa' %}">
+        ➕ افزودن ویزا
+    </a>
+
+</p>
+
+<table border="1" width="100%" cellpadding="10">
+
+    <tr>
+
+        <th>کشور</th>
+        <th>نوع ویزا</th>
+        <th>مدت اعتبار</th>
+        <th>زمان صدور</th>
+        <th>قیمت</th>
+        <th>عملیات</th>
+
+    </tr>
+
+    {% for visa in visas %}
+
+    <tr>
+
+        <td>{{ visa.country }}</td>
+
+        <td>{{ visa.visa_type }}</td>
+
+        <td>{{ visa.validity_days }} روز</td>
+
+        <td>{{ visa.processing_days }} روز</td>
+
+        <td>{{ visa.price }}</td>
+
+        <td>
+
+            <a href="{% url 'dashboard:edit_visa' visa.id %}">
+                ویرایش
+            </a>
+
+            |
+
+            <a href="{% url 'dashboard:delete_visa' visa.id %}">
+                حذف
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

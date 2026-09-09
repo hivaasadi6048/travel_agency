@@ -1,0 +1,31 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+ثبت هزینه رزرو
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+ثبت هزینه برای رزرو
+
+{{ booking.booking_code }}
+
+</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        ذخیره
+
+    </button>
+
+</form>
+
+{% endblock %}

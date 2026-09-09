@@ -1,0 +1,68 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>لیست تورها</h2>
+
+<p>
+<a href="{% url 'dashboard:add_tour' %}">
+➕ افزودن تور
+</a>
+</p>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+    <th>کد تور</th>
+    <th>عنوان</th>
+    <th>مقصد</th>
+    <th>حرکت</th>
+    <th>برگشت</th>
+    <th>وضعیت</th>
+    <th>عملیات</th>
+    <th>جزئیات</th>
+</tr>
+
+{% for tour in tours %}
+
+<tr>
+
+    <td>{{ tour.tour_code }}</td>
+    <td>{{ tour.title }}</td>
+    <td>{{ tour.destination }}</td>
+    <td>{{ tour.departure_date }}</td>
+    <td>{{ tour.return_date }}</td>
+    <td>{{ tour.get_status_display }}</td>
+
+    <td>
+
+        <a href="{% url 'dashboard:edit_tour' tour.id %}">
+            ویرایش
+        </a>
+
+        |
+
+        <a href="{% url 'dashboard:delete_tour' tour.id %}">
+            حذف
+        </a>
+        
+
+        <td>
+
+            <a href="{% url 'dashboard:tour_detail' tour.id %}">
+             مشاهده
+            </a>
+
+        </td>
+
+    </td>
+
+    
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

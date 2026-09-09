@@ -1,0 +1,183 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        {% block title %}
+        داشبورد
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'dashboard/css/base.css' %}">
+
+
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    {% endblock %}      
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            آژانس مسافرتی
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="{% url 'dashboard:dashboard' %}">
+                    داشبورد
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:passengers' %}">
+                    مسافران
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:bookings' %}">
+                    رزروها
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:tour_list' %}">
+                    تورها
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:accommodation_list' %}">
+                 اقامتگاه‌ها
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:visa_list' %}">
+                     ویزاها
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:flight_list' %}">
+                 پروازها
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:payment_list' %}">
+                    پرداخت‌ها
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{% url 'dashboard:expense_list' %}">
+                     هزینه‌ها
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{% url 'dashboard:refund_list' %}">
+                 استردادها
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:country_list' %}">
+                    کشورها
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:city_list' %}">
+                    شهرها
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard:financial_report' %}">
+                    گزارش مالی
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="header">
+
+            <div>
+                پنل مدیریت
+            </div>
+
+            <div>
+                <div style="display:flex;gap:10px;align-items:center;">
+
+                    <form method="get"
+                        action="{% url 'dashboard:global_search' %}">
+
+                        <input
+                            type="text"
+                            name="q"
+                            placeholder="جستجوی مسافر، رزرو، پاسپورت..."
+                            style="padding:6px 10px;width:250px;"
+                        >
+
+                        <button type="submit">
+                         جستجو
+                        </button>
+
+                    </form>
+
+                    <span>
+                    {{ request.user.username }}
+                    </span>
+
+            </div>
+            </div>
+
+        </header>
+
+        <section class="content">
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <p>
+                        {{ message }}
+                    </p>
+
+                {% endfor %}
+
+            {% endif %}
+
+            {% block content %}
+           
+            {% endblock %}
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

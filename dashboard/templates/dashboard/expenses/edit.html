@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+ویرایش هزینه
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+ویرایش هزینه
+
+</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        ذخیره
+
+    </button>
+
+</form>
+
+{% endblock %}

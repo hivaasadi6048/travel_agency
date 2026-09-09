@@ -1,0 +1,45 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+ثبت استرداد
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+ثبت استرداد
+
+</h2>
+
+<p>
+
+خدمت:
+
+{{ booking_item }}
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        ثبت استرداد
+
+    </button>
+
+</form>
+
+<br>
+
+<a href="{% url 'dashboard:booking_detail' booking_item.booking.id %}">
+
+بازگشت به رزرو
+
+</a>
+
+{% endblock %}

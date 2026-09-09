@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>کشورها</h2>
+
+<a href="{% url 'dashboard:add_country' %}">
+    افزودن کشور
+</a>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>نام</th>
+    <th>کد</th>
+    <th>عملیات</th>
+
+</tr>
+
+{% for country in countries %}
+
+<tr>
+
+    <td>{{ country.name }}</td>
+
+    <td>{{ country.code }}</td>
+
+    <td>
+
+        <a href="{% url 'dashboard:edit_country' country.id %}">
+            ویرایش
+        </a>
+
+        |
+
+        <a href="{% url 'dashboard:delete_country' country.id %}">
+            حذف
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

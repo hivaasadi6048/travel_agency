@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h1>ورود به سیستم</h1>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <input
+        type="text"
+        name="username"
+        placeholder="نام کاربری"
+    >
+
+    <input
+        type="password"
+        name="password"
+        placeholder="رمز عبور"
+    >
+
+    <button type="submit">
+        ورود
+    </button>
+
+</form>
+
+{% endblock %}

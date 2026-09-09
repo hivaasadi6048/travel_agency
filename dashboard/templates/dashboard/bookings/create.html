@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+ثبت رزرو
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+ثبت رزرو جدید
+
+</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        ثبت رزرو
+
+    </button>
+
+</form>
+
+{% endblock %}

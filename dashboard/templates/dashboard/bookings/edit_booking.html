@@ -1,0 +1,123 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+ویرایش رزرو
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+ویرایش رزرو
+
+{{ booking.booking_code }}
+
+</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        ذخیره تغییرات
+
+    </button>
+
+</form>
+
+
+<hr>
+
+<h3>
+
+خدمات این رزرو
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>نوع خدمت</th>
+
+    <th>شرح</th>
+
+    <th>قیمت</th>
+
+    <th>عملیات</th>
+
+</tr>
+
+{% for item in items %}
+
+<tr>
+
+    <td>
+
+        {{ item.get_item_type_display }}
+
+    </td>
+
+    <td>
+
+        {% if item.tour %}
+            {{ item.tour.title }}
+
+        {% elif item.flight %}
+            {{ item.flight }}
+
+        {% elif item.accommodation %}
+            {{ item.accommodation.name }}
+
+        {% elif item.visa %}
+            {{ item.visa }}
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        {{ item.price }}
+
+    </td>
+
+    <td>
+
+        <a href="{% url 'dashboard:edit_booking_item' item.id %}">
+            ویرایش
+        </a>
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+    <td colspan="4">
+
+        هیچ خدمتی ثبت نشده
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<br>
+
+<a href="{% url 'dashboard:booking_detail' booking.id %}">
+
+بازگشت به جزئیات رزرو
+
+</a>
+
+{% endblock %}

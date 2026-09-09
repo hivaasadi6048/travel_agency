@@ -1,0 +1,216 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+داشبورد
+{% endblock %}
+
+{% block content %}
+
+<h2>داشبورد مدیریت</h2>
+
+<br>
+<hr>
+<br>
+<h3>
+
+هشدار مدارک
+
+</h3>
+
+<div class="stats-container">
+
+    <div class="stat-card">
+        <h3>پاسپورت منقضی</h3>
+        <p class="danger">
+            {{ expired_passports.count }}
+        </p>
+    </div>
+
+    <div class="stat-card">
+        <h3>نزدیک به انقضا</h3>
+        <p class="warning">
+            {{ expiring_passports.count }}
+        </p>
+    </div>
+
+</div>
+
+<hr>
+<br>
+<br>
+
+<h3>
+
+آمار کلی
+
+</h3>
+<br>
+
+
+<div class="stats-container">
+
+
+    <div class="stat-card">
+        <h3>مسافران</h3>
+        <p>{{ passenger_count }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>رزروها</h3>
+        <p>{{ booking_count }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>کل هزینه ها</h3>
+        <p>{{ total_expenses }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>کل فروش</h3>
+        <p>{{ total_sales }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>دریافتی</h3>
+        <p>{{ total_payments }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>استرداد</h3>
+        <p>{{ total_refunds }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>بدهی مشتریان</h3>
+        <p>{{ total_debts }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>سود خالص</h3>
+        <p>{{ net_profit }}</p>
+    </div>
+</div>
+
+<hr>
+
+<h3>
+
+فروش خدمات
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>خدمت</th>
+
+    <th>تعداد فروش</th>
+
+    <th>مبلغ فروش</th>
+
+</tr>
+
+<tr>
+
+    <td>تور</td>
+
+    <td>{{ tour_sales }}</td>
+
+    <td>{{ tour_amount }}</td>
+
+</tr>
+
+<tr>
+
+    <td>پرواز</td>
+
+    <td>{{ flight_sales }}</td>
+
+    <td>{{ flight_amount }}</td>
+
+</tr>
+
+<tr>
+
+    <td>اقامتگاه</td>
+
+    <td>{{ accommodation_sales }}</td>
+
+    <td>{{ accommodation_amount }}</td>
+
+</tr>
+
+<tr>
+
+    <td>ویزا</td>
+
+    <td>{{ visa_sales }}</td>
+
+    <td>{{ visa_amount }}</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>
+
+لیست بدهکاران 
+
+</h3>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>مسافر</th>
+
+    <th>کد رزرو</th>
+
+    <th>بدهی</th>
+
+</tr>
+
+{% for booking in debtors %}
+
+<tr>
+
+    <td>
+
+        {{ booking.passenger }}
+
+    </td>
+
+    <td>
+
+        {{ booking.booking_code }}
+
+    </td>
+
+    <td>
+
+        {{ booking.remaining_amount }}
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+    <td colspan="3">
+
+        بدهکاری وجود ندارد
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

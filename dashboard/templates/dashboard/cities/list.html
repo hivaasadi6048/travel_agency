@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>شهرها</h2>
+
+<a href="{% url 'dashboard:add_city' %}">
+    افزودن شهر
+</a>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>شهر</th>
+    <th>کشور</th>
+    <th>عملیات</th>
+
+</tr>
+
+{% for city in cities %}
+
+<tr>
+
+    <td>{{ city.name }}</td>
+
+    <td>{{ city.country.name }}</td>
+
+    <td>
+
+        <a href="{% url 'dashboard:edit_city' city.id %}">
+            ویرایش
+        </a>
+
+        |
+
+        <a href="{% url 'dashboard:delete_city' city.id %}">
+            حذف
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

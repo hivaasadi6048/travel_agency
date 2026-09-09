@@ -1,0 +1,90 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+هزینه‌ها
+{% endblock %}
+
+{% block content %}
+
+<h2>لیست هزینه‌ها</h2>
+
+<a href="{% url 'dashboard:add_expense' %}">
+➕ ثبت هزینه
+</a>
+
+<br><br>
+
+<table>
+
+    <tr>
+
+        <th>رزرو</th>
+
+        <th>دسته</th>
+
+        <th>عنوان</th>
+
+        <th>مبلغ</th>
+
+        <th>تاریخ</th>
+
+        <th>عملیات</th>
+
+    </tr>
+
+    {% for expense in expenses %}
+
+    <tr>
+
+        <td>
+
+            {{ expense.booking }}
+
+        </td>
+
+        <td>
+
+            {{ expense.get_category_display }}
+
+        </td>
+
+        <td>
+
+            {{ expense.title }}
+
+        </td>
+
+        <td>
+
+            {{ expense.amount }}
+
+        </td>
+
+        <td>
+
+            {{ expense.paid_at }}
+
+        </td>
+
+
+        <td>
+
+            <a href="{% url 'dashboard:edit_expense' expense.id %}">
+             ویرایش
+            </a>
+
+            |
+
+            <a href="{% url 'dashboard:delete_expense' expense.id %}">
+             حذف
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

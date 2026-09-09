@@ -1,0 +1,65 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h2>لیست پروازها</h2>
+
+<p>
+
+<a href="{% url 'dashboard:add_flight' %}">
+    ➕ افزودن پرواز
+</a>
+
+</p>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+    <th>نوع</th>
+    <th>مبدا</th>
+    <th>مقصد</th>
+    <th>شرکت</th>
+    <th>شماره</th>
+    <th>قیمت</th>
+    <th>عملیات</th>
+
+</tr>
+
+{% for flight in flights %}
+
+<tr>
+
+    <td>{{ flight.get_transport_type_display }}</td>
+
+    <td>{{ flight.from_city }}</td>
+
+    <td>{{ flight.to_city }}</td>
+
+    <td>{{ flight.airline }}</td>
+
+    <td>{{ flight.flight_number }}</td>
+
+    <td>{{ flight.price }}</td>
+
+    <td>
+
+        <a href="{% url 'dashboard:edit_flight' flight.id %}">
+            ویرایش
+        </a>
+
+        |
+
+        <a href="{% url 'dashboard:delete_flight' flight.id %}">
+            حذف
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

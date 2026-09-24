@@ -1,0 +1,7 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}دسترسی ممنوع{% endblock %}
+{% block content %}
+<h2>دسترسی شما محدود است</h2>
+<p>شما به این صفحه دسترسی ندارید.</p>
+<a href="{% url 'dashboard:dashboard' %}">بازگشت به داشبورد</a>
+{% endblock %}

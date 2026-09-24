@@ -220,6 +220,7 @@ def global_search(request):
     )
 #---------------------------------------بخش مسافران #
 
+@login_required
 def passenger_list(request):
 
     query = request.GET.get('q')
@@ -251,6 +252,7 @@ def passenger_list(request):
     
 #---------------------------------------------جزئیات مسافر#
     
+@login_required
 def passenger_detail(request, pk):
 
     passenger = get_object_or_404(
@@ -314,6 +316,7 @@ def passenger_detail(request, pk):
         context
     )
 #---------------------------------------اضافه کردن مسافر جدید#    
+@login_required
 def passenger_create(request):
 
     if request.method == 'POST':
@@ -346,6 +349,7 @@ def passenger_create(request):
     
     
 #--------------------------------------ویرایش مسافر جدید#
+@login_required
 def passenger_edit(request, pk):
 
     passenger = get_object_or_404(
@@ -394,6 +398,7 @@ def passenger_edit(request, pk):
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
+@login_required
 def delete_passenger(request, pk):
 
     passenger = get_object_or_404(
@@ -424,6 +429,7 @@ def delete_passenger(request, pk):
 
 #-----------------------------------------------پرداخت ها#
 
+@login_required
 def payment_list(request):
 
     payments = Payment.objects.all().order_by(
@@ -443,6 +449,7 @@ def payment_list(request):
 
 #----------------------------------------اضافه کردن پرداختی#
 
+@login_required
 def add_payment(request, pk):
 
     passenger = get_object_or_404(
@@ -613,6 +620,7 @@ def bookings_list(request):
     )
 
 #------------------------------------------ساخت رزروها#  
+@login_required
 def booking_create(request):
 
     if request.method == 'POST':
@@ -648,6 +656,7 @@ def booking_create(request):
 
 #--------------------------------------حذف رزرو#
 
+@login_required
 def delete_booking(request, pk):
 
     booking = get_object_or_404(
@@ -674,6 +683,7 @@ def delete_booking(request, pk):
     
 
 #--------------------------------------جزئیات رزرو#
+@login_required
 def booking_detail(request, pk):
 
     booking = get_object_or_404(
@@ -715,6 +725,7 @@ def booking_detail(request, pk):
     )
     
 #------------------------------------اضافه کردن تورها به رزروها#       
+@login_required
 def add_tour_to_booking(request, booking_id):
 
     booking = get_object_or_404(
@@ -763,6 +774,7 @@ def add_tour_to_booking(request, booking_id):
     )
     
 #-----------------------------------اضافه کردن پروازها به رزروها#       
+@login_required
 def add_flight_to_booking(request, booking_id):
 
     booking = get_object_or_404(
@@ -808,6 +820,7 @@ def add_flight_to_booking(request, booking_id):
     
     
 #------------------------------------اضافه کردن ویزا به رزروها#      
+@login_required
 def add_visa_to_booking(request, booking_id):
 
     booking = get_object_or_404(
@@ -853,6 +866,7 @@ def add_visa_to_booking(request, booking_id):
     
     
 #--------------------------------اضافه کردن اقامتگاه به رزروها#   
+@login_required
 def add_accommodation_to_booking(request, booking_id):
 
     booking = get_object_or_404(
@@ -898,6 +912,7 @@ def add_accommodation_to_booking(request, booking_id):
     
     
  #---------------------------------------------حذف  رزروها#   
+@login_required
 def delete_booking_item(request, pk):
 
     item = get_object_or_404(
@@ -965,6 +980,7 @@ def edit_booking(request, pk):
     )
     
 #----------------------------------------ویرایش  آیتم رزروها#     
+@login_required
 def edit_booking_item(request, pk):
 
     item = get_object_or_404(
@@ -1032,6 +1048,7 @@ def edit_booking_item(request, pk):
 
 
 
+@login_required
 def accommodation_list(request):
 
     accommodations = Accommodation.objects.all().order_by('name')
@@ -1046,6 +1063,7 @@ def accommodation_list(request):
     
     
 #------------------------------------اضافه کردن اقامتگاه#
+@login_required
 def add_accommodation(request):
 
     if request.method == 'POST':
@@ -1076,6 +1094,7 @@ def add_accommodation(request):
     
     
 #-----------------------------------------ویرایش اقامتگاه#
+@login_required
 def edit_accommodation(request, pk):
 
     accommodation = get_object_or_404(
@@ -1115,6 +1134,7 @@ def edit_accommodation(request, pk):
     
     
 #-------------------------------------------حذف اقامتگاه#
+@login_required
 def delete_accommodation(request, pk):
 
     accommodation = get_object_or_404(
@@ -1145,6 +1165,7 @@ def delete_accommodation(request, pk):
     
     
 #--------------------------------------------لیست ویزاها#
+@login_required
 def visa_list(request):
 
     visas = Visa.objects.all().order_by(
@@ -1161,6 +1182,7 @@ def visa_list(request):
     
     
 #-------------------------------------------افزودن ویزا#
+@login_required
 def add_visa(request):
 
     if request.method == 'POST':
@@ -1189,6 +1211,7 @@ def add_visa(request):
     
     
 #-----------------------------------------ویرایش ویزا#
+@login_required
 def edit_visa(request, pk):
 
     visa = get_object_or_404(
@@ -1228,6 +1251,7 @@ def edit_visa(request, pk):
     
     
 #---------------------------------حذف ویزا#
+@login_required
 def delete_visa(request, pk):
 
     visa = get_object_or_404(
@@ -1259,6 +1283,7 @@ def delete_visa(request, pk):
     
     
 #-----------------------------------------------لیست پروازها#
+@login_required
 def flight_list(request):
 
     flights = Flight.objects.all().order_by('-id')
@@ -1273,6 +1298,7 @@ def flight_list(request):
     
     
 #------------------------------------------افزودن پروازها#
+@login_required
 def add_flight(request):
 
     if request.method == 'POST':
@@ -1301,6 +1327,7 @@ def add_flight(request):
     
     
 #-----------------------------------------ویرایش پروازها#
+@login_required
 def edit_flight(request, pk):
 
     flight = get_object_or_404(
@@ -1340,6 +1367,7 @@ def edit_flight(request, pk):
     
     
 #--------------------------------------------حذف پروازها#
+@login_required
 def delete_flight(request, pk):
 
     flight = get_object_or_404(
@@ -1369,6 +1397,7 @@ def delete_flight(request, pk):
     
     
 #------------------------------------------لیست تورها#
+@login_required
 def tour_list(request):
 
     tours = Tour.objects.all().order_by(
@@ -1385,6 +1414,7 @@ def tour_list(request):
     
     
 #-------------------------------------------افزودن تور#
+@login_required
 def add_tour(request):
 
     if request.method == 'POST':
@@ -1414,6 +1444,7 @@ def add_tour(request):
     
     
 #-----------------------------------------------ویرایش تور#
+@login_required
 def edit_tour(request, pk):
 
     tour = get_object_or_404(
@@ -1453,6 +1484,7 @@ def edit_tour(request, pk):
     
     
 #----------------------------------------------حذف تور#
+@login_required
 def delete_tour(request, pk):
 
     tour = get_object_or_404(
@@ -1483,6 +1515,7 @@ def delete_tour(request, pk):
     
     
 #-------------------------------------------جزئیات تور#
+@login_required
 def tour_detail(request, pk):
 
     tour = get_object_or_404(
@@ -1507,6 +1540,7 @@ def tour_detail(request, pk):
     
     
 #--------------------------------------افزودن پرواز به تور#
+@login_required
 def add_tour_flight(request, tour_id):
 
     tour = get_object_or_404(
@@ -1550,6 +1584,7 @@ def add_tour_flight(request, tour_id):
     
     
 #------------------------------------افزودن اقامتگاه به تور#
+@login_required
 def add_tour_accommodation(request, tour_id):
 
     tour = get_object_or_404(
@@ -1594,6 +1629,7 @@ def add_tour_accommodation(request, tour_id):
     
 
 #-------------------------------------ویرایش پروازهای تور#
+@login_required
 def edit_tour_flight(request, pk):
 
     tour_flight = get_object_or_404(
@@ -1635,6 +1671,7 @@ def edit_tour_flight(request, pk):
     
     
 #--------------------------------------حذف پروازهای تور#
+@login_required
 def delete_tour_flight(request, pk):
 
     tour_flight = get_object_or_404(
@@ -1654,6 +1691,7 @@ def delete_tour_flight(request, pk):
     
     
 #---------------------------------------ویرایش اقامتگاهای تور#
+@login_required
 def edit_tour_accommodation(request, pk):
 
     item = get_object_or_404(
@@ -1694,6 +1732,7 @@ def edit_tour_accommodation(request, pk):
     
     
 #-----------------------------------------حذف اقامتگاهای تور#
+@login_required
 def delete_tour_accommodation(request, pk):
 
     item = get_object_or_404(
@@ -1713,6 +1752,7 @@ def delete_tour_accommodation(request, pk):
     
     
 #---------------------------------------------لیست کشورها#
+@login_required
 def country_list(request):
 
     countries = Country.objects.all().order_by(
@@ -1730,6 +1770,7 @@ def country_list(request):
     
     
 #------------------------------------------------افزودن کشور#
+@login_required
 def add_country(request):
 
     if request.method == 'POST':
@@ -1758,6 +1799,7 @@ def add_country(request):
     
     
 #------------------------------------------ویرایش کشورها #
+@login_required
 def edit_country(request, pk):
 
     country = get_object_or_404(
@@ -1798,6 +1840,7 @@ def edit_country(request, pk):
     
     
 #-------------------------------------------حذف کشورها#
+@login_required
 def delete_country(request, pk):
 
     country = get_object_or_404(
@@ -1822,6 +1865,7 @@ def delete_country(request, pk):
     
     
 #--------------------------------------------لیست شهرها#
+@login_required
 def city_list(request):
 
     cities = City.objects.select_related(
@@ -1839,6 +1883,7 @@ def city_list(request):
     
 
 #---------------------------------------------افزودن شهرها#
+@login_required
 def add_city(request):
 
     if request.method == 'POST':
@@ -1868,6 +1913,7 @@ def add_city(request):
     
     
 #-----------------------------------------ویرایش شهرها#
+@login_required
 def edit_city(request, pk):
 
     city = get_object_or_404(
@@ -1907,6 +1953,7 @@ def edit_city(request, pk):
     
     
 #--------------------------------------------حذف شهرها#
+@login_required
 def delete_city(request, pk):
 
     city = get_object_or_404(
@@ -1932,6 +1979,7 @@ def delete_city(request, pk):
  
  
 #-----------------------------------------------لیست استرداد #
+@login_required
 def refund_list(request):
 
     refunds = Refund.objects.select_related(
@@ -1951,6 +1999,7 @@ def refund_list(request):
     
     
 #--------------------------------------اضافه کردن کنسلی ها#
+@login_required
 def add_refund(request, pk):
 
     booking_item = get_object_or_404(
@@ -1996,6 +2045,7 @@ def add_refund(request, pk):
     
     
 #------------------------------------------------ویرایش کنسلی ها#
+@login_required
 def edit_refund(request, pk):
 
     refund = get_object_or_404(
@@ -2037,6 +2087,7 @@ def edit_refund(request, pk):
     
     
 #---------------------------------------------حذف کنسلی#
+@login_required
 def delete_refund(request, pk):
 
     refund = get_object_or_404(
@@ -2068,6 +2119,7 @@ def delete_refund(request, pk):
     
 
 #---------------------------------------ثبت هزینه در رزرو#
+@login_required
 def add_booking_expense(request, booking_id):
 
     booking = get_object_or_404(
@@ -2115,6 +2167,7 @@ def add_booking_expense(request, booking_id):
     
 #--------------------------------------------لیست هزینه ها#
 
+@login_required
 def expense_list(request):
 
     expenses = Expense.objects.select_related(
@@ -2138,6 +2191,7 @@ def expense_list(request):
 
     
 #---------------------------------------ثبت و اضافه کردن هزینه#
+@login_required
 def add_expense(request):
 
     if request.method == 'POST':
@@ -2170,6 +2224,7 @@ def add_expense(request):
     
 #-------------------------------------------------ویرایش هزینه#
 
+@login_required
 def edit_expense(request, pk):
 
     expense = get_object_or_404(
@@ -2209,6 +2264,7 @@ def edit_expense(request, pk):
     
     
 #--------------------------------------------------حذف هزینه ها#
+@login_required
 def delete_expense(request, pk):
 
     expense = get_object_or_404(
@@ -2237,6 +2293,7 @@ def delete_expense(request, pk):
     
     
 #---------------------------------------------افزودن مدارک#
+@login_required
 def add_document(request, passenger_id):
 
     passenger = get_object_or_404(
@@ -2285,6 +2342,7 @@ def add_document(request, passenger_id):
     
 #----------------------------------------------------ویرایش مدارک#
 
+@login_required
 def edit_document(request, pk):
 
     document = get_object_or_404(
@@ -2329,6 +2387,7 @@ def edit_document(request, pk):
     
 #----------------------------------------------حذف مدارک#
 
+@login_required
 def delete_document(request, pk):
 
     document = get_object_or_404(
@@ -2364,6 +2423,7 @@ def delete_document(request, pk):
 
 #---------------------------------------------ثبت پایپورت#
 
+@login_required
 def add_passport(request, passenger_id):
 
     passenger = get_object_or_404(
@@ -2415,6 +2475,7 @@ def add_passport(request, passenger_id):
     
     
 #----------------------------------------------ویرایش پاسپورت#
+@login_required
 def edit_passport(request, pk):
 
     passport = get_object_or_404(
@@ -2457,6 +2518,7 @@ def edit_passport(request, pk):
     
 #----------------------------------------------------حذف پاسپورت#
 
+@login_required
 def delete_passport(request, pk):
 
     passport = get_object_or_404(
@@ -2490,6 +2552,7 @@ def delete_passport(request, pk):
 
 #------------------------------------------------گزارش مالی#
 
+@login_required
 def financial_report(request):
     
     from_date = request.GET.get(

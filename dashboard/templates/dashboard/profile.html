@@ -1,0 +1,14 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}پروفایل{% endblock %}
+{% block content %}
+<h2>پروفایل کاربری</h2>
+<div class="profile-header">
+    <h3>{{ user.username }}</h3>
+    <a class="btn-edit" href="{% url 'dashboard:change_password' %}">تغییر رمز</a>
+</div>
+<div class="info-card">
+    <p><strong>نام کاربری:</strong> {{ user.username }}</p>
+    <p><strong>ایمیل:</strong> {{ user.email }}</p>
+    <p><strong>تاریخ عضویت:</strong> {{ user.date_joined|date:'Y/m/d' }}</p>
+</div>
+{% endblock %}

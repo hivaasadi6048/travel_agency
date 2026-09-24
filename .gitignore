@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *.pyo
+*.pyc
 
 # Virtual environment
 venv/
@@ -11,6 +12,7 @@ env/
 # Environment variables / secrets
 .env
 .env.*
+!.env.example
 
 # IDE
 .idea/
@@ -18,6 +20,8 @@ env/
 
 # Django
 db.sqlite3
+*.sqlite3
+db.sqlite3-journal
 
 # User uploaded media
 media/
@@ -28,3 +32,24 @@ media/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Build
+staticfiles/
+
+# Database migrations
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Coverage
+htmlcov/
+.coverage
+*.cover
+
+# Editor
+*.swp
+*.swo
+*~
+
+# IDE
+*.sublime-workspace
+*.iml

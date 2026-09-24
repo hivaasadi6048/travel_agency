@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آژانس هواپیمایی ورزان گشت</title>
+    <meta name="description" content="آژانس هواپیمایی ورزان گشت - رزرو تورهای بین‌المللی، پروازها، اقامتگاه‌ها و ویزای سفر">
+    <link rel="stylesheet" href="{% static 'landing/css/style.css' %}">
+</head>
+<body>
+
+<!-- ناوبری -->
+<nav class="navbar">
+    <a href="#" class="navbar-brand">✈️ ورزان گشت</a>
+    <div class="navbar-links">
+        <a href="#home">خانه</a>
+        <a href="#services">خدمات</a>
+        <a href="#about">درباره ما</a>
+        <a href="#contact">تماس</a>
+        <a href="{% url 'dashboard:login' %}" class="btn-nav">پنل مدیریت</a>
+    </div>
+</nav>
+
+<!-- هیرو -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="hero-logo">✈️</div>
+        <h1>آژانس هواپیمایی ورزان گشت</h1>
+        <p class="subtitle">سفر رویای شما را به واقعیت تبدیل می‌کنیم<br>تورهای بین‌المللی | پروازها | اقامتگاه‌ها | ویزا</p>
+        <div class="cta-buttons">
+            <a href="#services" class="btn-primary">مشاهده خدمات</a>
+            <a href="{% url 'dashboard:login' %}" class="btn-outline">ورود به پنل مدیریت</a>
+        </div>
+    </div>
+</section>
+
+<!-- خدمات -->
+<section class="section" id="services">
+    <h2 class="section-title">خدمات ما</h2>
+    <p class="section-subtitle">هر خیالی که دارید، ما اجرایش را برایتان به عهده داریم</p>
+    <div class="services-grid">
+        <div class="service-card fade-in">
+            <div class="service-icon">✈️</div>
+            <h3>پروازهای بین‌المللی</h3>
+            <p>رزرو بلیت پروازهای ارزان و مستقیم به مقصدهای مختلف جهان با بهترین قیمت‌ها</p>
+        </div>
+        <div class="service-card fade-in">
+            <div class="service-icon">🏨</div>
+            <h3>اقامتگاه‌های لوکس</h3>
+            <p>رزرو هتل و آپارتمان در بهترین مقاصد جهان با کیفیت بالا و قیمت مناسب</p>
+        </div>
+        <div class="service-card fade-in">
+            <div class="service-icon">🗺️</div>
+            <h3>تورهای گردشگری</h3>
+            <p>برنامه‌ریزی تورهای سازمان‌یافته به مقاصد گردشگری با راهنمای حرفه‌ای</p>
+        </div>
+        <div class="service-card fade-in">
+            <div class="service-icon">🛂</div>
+            <h3>صدور ویزا</h3>
+            <p>راهنمایی و کمک در صدور ویزای کشورهای مختلف با سرعت و کیفیت بالا</p>
+        </div>
+    </div>
+</section>
+
+<!-- درباره ما -->
+<section class="about-section" id="about">
+    <div class="about-container">
+        <div class="about-text">
+            <h2>درباره آژانس ورزان گشت</h2>
+            <p>ما با بیش از ۱۰ سال تجربه در صنعت مسافرتی، بهترین خدمات سفر را ارائه می‌دهیم. تیم ما از متخصصان حرفه‌ای تشکیل شده که هدفشان رضایت کامل شماست.</p>
+            <p>با بیش از ۵۰,۰۰۰ مسافر راضی و صدها مقصد مختلف، ورزان گشت انتخاب اول مسافران ایرانی است.</p>
+            <div class="about-stats">
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">سال تجربه</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">مسافر راضی</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">مقصد جهانی</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">پشتیبانی</div>
+                </div>
+            </div>
+        </div>
+        <div class="about-image">
+            <div style="background: linear-gradient(135deg, #1a237e, #5c6bc0); border-radius: 20px; height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 120px;">
+                ✈️
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- نظرات مشتریان -->
+<section class="testimonials-section" id="testimonials">
+    <div class="section">
+        <h2 class="section-title">نظرات مسافران</h2>
+        <p class="section-subtitle">آرای کاربران ما</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <p class="testimonial-text">"سفر فوق‌العاده‌ای داشتیم! تیم ورزان گشت با حرفه‌ای بودنش عالی بود. توصیه می‌کنم."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">س</div>
+                    <div>
+                        <div class="testimonial-name">سارا احمدی</div>
+                        <div class="testimonial-role">مسافر تور استانبول</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <p class="testimonial-text">"ویزا رو خیلی سریع صدور کردن. بهترین آژانس بدون شک! برنامه بعدی رو حتماً همراهی می‌کنم."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">م</div>
+                    <div>
+                        <div class="testimonial-name">محمد رضایی</div>
+                        <div class="testimonial-role">مسافر ویزای شنگهای</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <p class="testimonial-text">"اقامتگاه خیلی خوب بود و قیمت هم مناسب بود. خدمات فوق‌العاده از تیم ورزان گشت"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">ز</div>
+                    <div>
+                        <div class="testimonial-name">زهرا کریمی</div>
+                        <div class="testimonial-role">مسافر اقامت دبی</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- تماس -->
+<section class="contact-section" id="contact">
+    <div class="section">
+        <h2 class="section-title">تماس با ما</h2>
+        <p class="section-subtitle">سوالی دارید؟ ما در خدمت شما هستیم</p>
+        <div class="contact-container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>اطلاعات تماس</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div class="contact-detail">تهران، خیابان ولیعصر، فلور ۵</div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div class="contact-detail">۰۲۱-۱۲۳۴۵۶۷۸</div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div class="contact-detail">info@varanshgešt.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🕐</span>
+                        <div class="contact-detail">شنبه تا چهارشنبه: ۹ صبح تا ۶ عصر</div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form method="post" action="#">
+                        <input type="text" name="name" placeholder="نام و نام خانوادگی" required>
+                        <input type="tel" name="phone" placeholder="شماره تماس" required>
+                        <input type="email" name="email" placeholder="ایمیل شما" required>
+                        <textarea name="message" placeholder="پیام شما..." required></textarea>
+                        <button type="submit" class="btn-primary" style="width:100%">ارسال پیام</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- فوتر -->
+<footer class="footer">
+    <div class="footer-logo">✈️ آژانس هواپیمایی ورزان گشت</div>
+    <div class="footer-links">
+        <a href="#home">خانه</a>
+        <a href="#services">خدمات</a>
+        <a href="#about">درباره ما</a>
+        <a href="#contact">تماس</a>
+        <a href="{% url 'dashboard:login' %}">پنل مدیریت</a>
+    </div>
+    <div class="footer-copy">
+        &copy; ۱۴۰۵ آژانس هواپیمایی ورزان گشت - تمامی حقوق محفوظ است
+    </div>
+</footer>
+
+<!-- اسکریپت انیمیشن -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    fadeElements.forEach(el => observer.observe(el));
+});
+</script>
+
+</body>
+</html>

@@ -34,6 +34,12 @@ from .forms import (
     PassportForm
 )
 
+
+#------------------------------------------------------------صفحه اصلی عمومی#
+def homepage(request):
+    return render(request, 'landing/index.html')
+
+
 #----------------------------------------------صفحه داشبورد #
 @login_required
 def dashboard_view(request):

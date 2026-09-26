@@ -147,21 +147,23 @@
                     </form>
                 </div>
             </div>
-            <div class="header-right">
-                <div class="user-info">
-                    <div class="user-avatar">
-                        <i class="fas fa-user-circle"></i>
+<div class="header-right">
+                    {% if user.is_authenticated %}
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-details">
+                            <span class="user-name">{{ user.get_full_name|default:user.username }}</span>
+                            <span class="user-role">مدیر</span>
+                        </div>
                     </div>
-                    <div class="user-details">
-                        <span class="user-name">{{ request.user.username }}</span>
-                        <span class="user-role">مدیر</span>
-                    </div>
+                    <a href="{% url 'dashboard:logout' %}" class="logout-btn" onclick="return confirm('آیا مطمئن هستید؟')">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>خروج</span>
+                    </a>
+                    {% endif %}
                 </div>
-                <a href="{% url 'dashboard:logout' %}" class="logout-btn" onclick="return confirm('آیا مطمئن هستید؟')">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>خروج</span>
-                </a>
-            </div>
         </header>
 
         <!-- Content Section -->

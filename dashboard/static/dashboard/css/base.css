@@ -233,7 +233,106 @@ table tr:last-child td { border-bottom: none; }
 .form-control::placeholder { color: var(--gray-400); }
 textarea.form-control { min-height: 100px; resize: vertical; }
 
-/* ====== BADGES ====== */
+/* ====== FORM STYLES (ALL FORMS) ====== */
+.form-wrapper {
+    max-width: 900px; margin: 0 auto;
+}
+.form-wrapper h2 {
+    font-size: 26px; color: var(--gray-900); font-weight: 700;
+    margin-bottom: 25px; padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary); display: inline-block;
+}
+.form-wrapper form {
+    background: white; border-radius: var(--border-radius);
+    padding: 35px; box-shadow: var(--shadow-md);
+}
+.form-wrapper .form-group { margin-bottom: 22px; }
+.form-wrapper label {
+    display: block; font-size: 14px; font-weight: 600;
+    color: var(--gray-700); margin-bottom: 8px;
+}
+.form-wrapper input[type="text"],
+.form-wrapper input[type="email"],
+.form-wrapper input[type="password"],
+.form-wrapper input[type="number"],
+.form-wrapper input[type="date"],
+.form-wrapper input[type="time"],
+.form-wrapper input[type="tel"],
+.form-wrapper select,
+.form-wrapper textarea {
+    width: 100%; padding: 12px 15px;
+    border: 2px solid var(--gray-200); border-radius: 10px;
+    font-size: 14px; font-family: inherit; transition: var(--transition);
+    background: #f8fafc; direction: rtl; color: var(--gray-800);
+}
+.form-wrapper input:focus,
+.form-wrapper select:focus,
+.form-wrapper textarea:focus {
+    border-color: var(--primary); outline: none;
+    box-shadow: 0 0 0 4px rgba(26,35,126,0.1);
+    background: white;
+}
+.form-wrapper input::placeholder,
+.form-wrapper textarea::placeholder { color: var(--gray-400); }
+.form-wrapper select {
+    cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 15px center;
+    padding-left: 40px;
+}
+.form-wrapper select option { padding: 8px; }
+.form-wrapper input[type="file"] {
+    padding: 10px; background: #f1f5f9; border: 2px dashed var(--gray-300);
+    border-radius: 10px; cursor: pointer; width: 100%;
+}
+.form-wrapper input[type="file"]:hover { border-color: var(--primary); }
+.form-wrapper input[type="checkbox"],
+.form-wrapper input[type="radio"] {
+    width: auto; margin-left: 8px; accent-color: var(--primary);
+}
+.form-wrapper .checkbox-group label {
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+}
+.form-wrapper .form-row {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+}
+.form-wrapper .form-actions {
+    display: flex; gap: 15px; margin-top: 25px; padding-top: 20px;
+    border-top: 1px solid var(--gray-200);
+}
+.form-wrapper .form-actions .btn {
+    min-width: 150px; justify-content: center;
+}
+.form-wrapper .form-actions .btn-outline {
+    background: white; border: 2px solid var(--gray-300);
+    color: var(--gray-600); padding: 12px 25px; border-radius: 10px;
+    font-size: 14px; font-weight: 600; font-family: inherit;
+    cursor: pointer; text-decoration: none; transition: var(--transition);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+}
+.form-wrapper .form-actions .btn-outline:hover {
+    border-color: var(--primary); color: var(--primary); background: #f0f3ff;
+}
+.form-wrapper .form-help {
+    font-size: 12px; color: var(--gray-400); margin-top: 4px;
+}
+.form-wrapper .field-error {
+    border-color: var(--danger) !important;
+    box-shadow: 0 0 0 4px rgba(220,38,38,0.1) !important;
+}
+.form-wrapper .error-list {
+    color: var(--danger); font-size: 12px; margin-top: 4px; list-style: none; padding: 0;
+}
+.form-wrapper .error-list li { margin: 2px 0; }
+.form-wrapper .field-with-icon { position: relative; }
+.form-wrapper .field-with-icon i {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--gray-400); font-size: 16px; pointer-events: none;
+}
+.form-wrapper .field-with-icon input { padding-left: 42px; }
+
+/* ====== BUTTONS ====== */
 .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
 .badge-primary { background: #e3f2fd; color: #1565c0; }
 .badge-success { background: #e8f5e9; color: #1b5e20; }

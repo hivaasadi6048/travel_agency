@@ -1,11 +1,229 @@
-{% extends 'dashboard/base.html' %}
-{% block title %}ثبت&#8203;نام{% endblock %}
-{% block content %}
-<h1>ثبت&#8203;نام در سیستم</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">ثبت&#8203;نام</button>
-</form>
-<p>قبلا&#8203; حساب دارید؟ <a href="{% url 'accounts:login' %}">ورود</a></p>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام - آژانس هواپیمایی ورزان گشت</title>
+    <meta name="description" content="ثبت‌نام در سیستم آژانس هواپیمایی ورزان گشت">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+            direction: rtl;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 30%, #3949ab 60%, #5c6bc0 100%);
+            overflow: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .register-container {
+            position: relative; z-index: 2;
+            width: 100%; max-width: 480px; padding: 0 20px;
+        }
+        .register-card {
+            background: white; border-radius: 24px; padding: 45px 40px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.6s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .register-logo {
+            text-align: center; margin-bottom: 35px;
+        }
+        .register-logo img {
+            width: 70px; height: 70px; border-radius: 18px;
+            object-fit: contain;
+            box-shadow: 0 4px 15px rgba(26,35,126,0.3);
+            margin-bottom: 15px;
+        }
+        .register-logo h2 { font-size: 24px; color: #1a237e; font-weight: 800; }
+        .register-logo p { font-size: 14px; color: #94a3b8; margin-top: 5px; }
+        .form-group { margin-bottom: 22px; }
+        .form-group label {
+            display: block; font-size: 14px; font-weight: 600;
+            color: #334155; margin-bottom: 8px;
+        }
+        .form-group .input-wrapper { position: relative; }
+        .form-group .input-wrapper i {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: #94a3b8; font-size: 16px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 14px 15px 14px 45px;
+            border: 2px solid #e2e8f0; border-radius: 12px;
+            font-size: 15px; font-family: inherit; transition: all 0.3s ease;
+            background: #f8fafc; direction: rtl; color: #334155;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1a237e; outline: none;
+            box-shadow: 0 0 0 4px rgba(26,35,126,0.1);
+            background: white;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: #cbd5e1; }
+        .form-group select {
+            cursor: pointer; appearance: none;
+            padding-left: 45px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 15px center;
+        }
+        .form-group textarea { padding-left: 15px; min-height: 80px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .register-btn {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #1a237e, #3949ab);
+            color: white; border: none; border-radius: 12px;
+            font-size: 17px; font-weight: 700; font-family: inherit;
+            cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            margin-top: 10px;
+        }
+        .register-btn:hover {
+            background: linear-gradient(135deg, #0d1452, #1a237e);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26,35,126,0.4);
+        }
+        .register-btn i { font-size: 18px; }
+        .register-footer {
+            text-align: center; margin-top: 25px;
+            padding-top: 20px; border-top: 1px solid #e2e8f0;
+        }
+        .register-footer a {
+            color: #1a237e; text-decoration: none; font-size: 14px; font-weight: 600;
+            transition: color 0.3s;
+        }
+        .register-footer a:hover { color: #3949ab; text-decoration: underline; }
+        .register-footer p { color: #94a3b8; font-size: 13px; margin-top: 10px; }
+        .alert-msg {
+            background: #ffebee; color: #b71c1c; padding: 12px 16px;
+            border-radius: 10px; font-size: 14px; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+            border: 1px solid #ffcdd2;
+        }
+        .alert-msg i { font-size: 18px; }
+        .alert-success-msg {
+            background: #e8f5e9; color: #1b5e20; padding: 12px 16px;
+            border-radius: 10px; font-size: 14px; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+            border: 1px solid #c8e6c9;
+        }
+        .alert-success-msg i { font-size: 18px; }
+        .password-hint {
+            font-size: 12px; color: #94a3b8; margin-top: 4px;
+        }
+        @media (max-width: 480px) {
+            .register-card { padding: 30px 20px; border-radius: 20px; }
+            .register-logo h2 { font-size: 20px; }
+            .register-btn { font-size: 15px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-card">
+            <div class="register-logo">
+                <img src="{% static 'dashboard/images/Varzan_Gasht_Transparent.png' %}" alt="ورزان گشت">
+                <h2>ثبت‌نام در سیستم</h2>
+                <p>آژانس هواپیمایی ورزان گشت</p>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert-success-msg">
+                            <i class="fas fa-check-circle"></i>
+                            {{ message }}
+                        </div>
+                    {% else %}
+                        <div class="alert-msg">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>نام کاربری</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>ایمیل</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        {{ form.email }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>شماره تلفن</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            {{ form.phone }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>کد ملی</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-card"></i>
+                            {{ form.national_code }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>رمز عبور</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password1 }}
+                    </div>
+                    <span class="password-hint">حداقل 8 کاراکتر</span>
+                </div>
+                <div class="form-group">
+                    <label>تکرار رمز عبور</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password2 }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>آدرس</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-map-marker-alt"></i>
+                        {{ form.address }}
+                    </div>
+                </div>
+                <button type="submit" class="register-btn">
+                    <i class="fas fa-user-plus"></i>
+                    ثبت‌نام
+                </button>
+            </form>
+
+            <div class="register-footer">
+                <a href="{% url 'accounts:login' %}">قبلاً حساب دارید؟ ورود</a>
+                <p>© ۱۴۰۵ آژانس هواپیمایی ورزان گشت</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

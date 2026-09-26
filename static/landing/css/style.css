@@ -49,7 +49,7 @@ body {
     display: inline-block;
 }
 .hero-logo img {
-    width: 100px;
+    width: 60px;
     height: auto;
     filter: drop-shadow(0 4px 15px rgba(0,0,0,0.3));
 }
@@ -474,4 +474,30 @@ body {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ---- Mobile Navbar ---- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+    .navbar-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .navbar-links.active {
+        display: flex;
+    }
+    .navbar-toggle {
+        display: block !important;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #1a237e;
+    }
 }

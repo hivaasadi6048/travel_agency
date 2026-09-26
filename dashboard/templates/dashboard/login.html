@@ -108,18 +108,6 @@
             border: 1px solid #ffcdd2;
         }
         .alert-msg i { font-size: 18px; }
-        .social-login {
-            display: flex; gap: 12px; margin-top: 20px;
-        }
-        .social-btn {
-            flex: 1; padding: 12px; border: 2px solid #e2e8f0;
-            border-radius: 12px; background: white; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            font-size: 14px; font-weight: 600; color: #475569;
-            transition: all 0.3s ease; font-family: inherit;
-        }
-        .social-btn:hover { border-color: #1a237e; color: #1a237e; background: #f0f3ff; }
-        .social-btn i { font-size: 18px; }
         @media (max-width: 480px) {
             .login-card { padding: 30px 20px; border-radius: 20px; }
             .login-logo h2 { font-size: 20px; }
@@ -145,20 +133,27 @@
                 {% endfor %}
             {% endif %}
 
+            {% if form.errors %}
+                <div class="alert-msg">
+                    <i class="fas fa-exclamation-circle"></i>
+                    نام کاربری یا رمز عبور اشتباه است.
+                </div>
+            {% endif %}
+
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     <label>نام کاربری</label>
                     <div class="input-wrapper">
                         <i class="fas fa-user"></i>
-                        <input type="text" name="username" placeholder="نام کاربری خود را وارد کنید" required autofocus>
+                        {{ form.username }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label>رمز عبور</label>
                     <div class="input-wrapper">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+                        {{ form.password }}
                     </div>
                 </div>
                 <button type="submit" class="login-btn">

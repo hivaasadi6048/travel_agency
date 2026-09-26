@@ -1,11 +1,13 @@
 {% extends 'dashboard/base.html' %}
 {% block title %}خروج{% endblock %}
 {% block content %}
-<h1>خروج از سیستم</h1>
-<p>آیا مطمئن هستید؟</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">خروج</button>
-    <a href="{% url 'dashboard:dashboard' %}">انصراف</a>
-</form>
+<div style="text-align:center;padding:50px;">
+    <h2>خروج از سیستم</h2>
+    <p>آیا مطمئن هستید؟</p>
+    <form method="post" style="display:flex;gap:15px;justify-content:center;">
+        {% csrf_token %}
+        <button type="submit" class="btn-booking">خروج</button>
+        <a href="{% url 'dashboard:dashboard' %}" class="btn-danger">انصراف</a>
+    </form>
+</div>
 {% endblock %}

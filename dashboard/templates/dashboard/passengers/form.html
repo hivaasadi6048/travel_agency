@@ -1,0 +1,11 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}افزودن مسافر{% endblock %}
+{% block content %}
+<h2>افزودن مسافر جدید</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-booking">ثبت مسافر</button>
+    <a href="{% url 'dashboard:passengers' %}" class="btn-danger">انصراف</a>
+</form>
+{% endblock %}

@@ -1,0 +1,75 @@
+/* --- Payment Styles --- */
+.payment-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.payment-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.payment-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.payment-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #16a34a;
+}
+
+.payment-method {
+    padding: 5px 12px;
+    background: #f0fdf4;
+    border-radius: 15px;
+    font-size: 12px;
+    color: #16a34a;
+    font-weight: bold;
+}
+
+.payment-date {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.payment-summary {
+    background: linear-gradient(135deg, #1a237e, #3949ab);
+    color: white;
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.payment-summary-item {
+    text-align: center;
+}
+
+.payment-summary-item .number {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.payment-summary-item .label {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+.payment-list {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}

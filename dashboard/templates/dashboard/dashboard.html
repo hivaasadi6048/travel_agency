@@ -1,216 +1,184 @@
 {% extends 'dashboard/base.html' %}
-
-{% block title %}
-داشبورد
+{% load static %}
+{% block title %}داشبورد{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
 {% endblock %}
-
+{% block page_title %}
+<h2>داشبورد مدیریت</h2>
+{% endblock %}
 {% block content %}
 
-<h2>داشبورد مدیریت</h2>
+<!-- Hero -->
+<div class="dashboard-hero">
+    <h2>به پنل مدیریت خوش آمدید 👋</h2>
+    <p>آژانس هواپیمایی ورزان گشت - مدیریت کلیسیک رزروها و مشتریان</p>
+</div>
 
-<br>
-<hr>
-<br>
-<h3>
+<!-- Quick Actions -->
+<div class="quick-actions">
+    <a href="{% url 'dashboard:passenger_create' %}" class="quick-action-btn">
+        <span class="qa-icon">👤</span>
+        <span class="qa-label">افزودن مسافر</span>
+    </a>
+    <a href="{% url 'dashboard:booking_create' %}" class="quick-action-btn">
+        <span class="qa-icon">📋</span>
+        <span class="qa-label">رزرو جدید</span>
+    </a>
+    <a href="{% url 'dashboard:tour_list' %}" class="quick-action-btn">
+        <span class="qa-icon">🗺️</span>
+        <span class="qa-label">مدیریت تورها</span>
+    </a>
+    <a href="{% url 'dashboard:financial_report' %}" class="quick-action-btn">
+        <span class="qa-icon">📊</span>
+        <span class="qa-label">گزارش مالی</span>
+    </a>
+</div>
 
-هشدار مدارک
+<!-- Stats -->
+<div class="dashboard-stats">
+    <div class="dashboard-stat-card">
+        <div class="stat-icon-wrapper" style="background:#e3f2fd;color:#2563eb;">👤</div>
+        <div class="stat-info">
+            <div class="stat-number">{{ passenger_count }}</div>
+            <div class="stat-label">مسافر</div>
+        </div>
+    </div>
+    <div class="dashboard-stat-card">
+        <div class="stat-icon-wrapper" style="background:#e8f5e9;color:#16a34a;">📋</div>
+        <div class="stat-info">
+            <div class="stat-number">{{ booking_count }}</div>
+            <div class="stat-label">رزرو</div>
+        </div>
+    </div>
+    <div class="dashboard-stat-card">
+        <div class="stat-icon-wrapper" style="background:#fff3e0;color:#f59e0b;">💰</div>
+        <div class="stat-info">
+            <div class="stat-number">{{ total_sales|default:"0" }}</div>
+            <div class="stat-label">فروش</div>
+        </div>
+    </div>
+    <div class="dashboard-stat-card">
+        <div class="stat-icon-wrapper" style="background:#ffebee;color:#dc2626;">💸</div>
+        <div class="stat-info">
+            <div class="stat-number">{{ total_debts|default:"0" }}</div>
+            <div class="stat-label">بدهی</div>
+        </div>
+    </div>
+    <div class="dashboard-stat-card">
+        <div class="stat-icon-wrapper" style="background:#e3f2fd;color:#2563eb;">📥</div>
+        <div class="stat-info">
+            <div class="stat-number">{{ total_payments|default:"0" }}</div>
+            <div class="stat-label">دریافتی</div>
+        </div>
+    </div>
+    <div class="dashboard-stat-card">
+        <div class="stat-icon-wrapper" style="background:#f3e5f5;color:#7b1fa2;">📊</div>
+        <div class="stat-info">
+            <div class="stat-number">{{ total_expenses|default:"0" }}</div>
+            <div class="stat-label">هزینه</div>
+        </div>
+    </div>
+</div>
 
-</h3>
+<!-- Two Columns -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;">
 
-<div class="stats-container">
-
-    <div class="stat-card">
-        <h3>پاسپورت منقضی</h3>
-        <p class="danger">
-            {{ expired_passports.count }}
-        </p>
+    <!-- Passport Alerts -->
+    <div class="section-card">
+        <div class="section-card-header">
+            <h3>⚠️ هشدار مدارک</h3>
+            <a href="{% url 'dashboard:passengers' %}" class="btn btn-sm btn-outline">مشاهده همه</a>
+        </div>
+        <div class="section-card-body">
+            {% if expired_passports %}
+                {% for p in expired_passports %}
+                <div class="passport-alert expired">
+                    <span style="font-size:24px;">❌</span>
+                    <div>
+                        <strong>{{ p.passenger }}</strong>
+                        <p class="text-sm" style="margin:0;">پاسپورت منقضی: {{ p.passport_number }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% if expiring_passports %}
+                {% for p in expiring_passports %}
+                <div class="passport-alert expiring">
+                    <span style="font-size:24px;">⚠️</span>
+                    <div>
+                        <strong>{{ p.passenger }}</strong>
+                        <p class="text-sm" style="margin:0;">منقضی‌ترین: {{ p.days_to_expire }} روز مانده</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% if not expired_passports and not expiring_passports %}
+                <div class="empty-state">
+                    <div class="icon">✅</div>
+                    <p>هیچ مدرک منقضی‌شده‌ای وجود ندارد</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
 
-    <div class="stat-card">
-        <h3>نزدیک به انقضا</h3>
-        <p class="warning">
-            {{ expiring_passports.count }}
-        </p>
+    <!-- Debtors -->
+    <div class="section-card">
+        <div class="section-card-header">
+            <h3>💳 بدهکاران</h3>
+            <a href="{% url 'dashboard:financial_report' %}" class="btn btn-sm btn-outline">گزارش کامل</a>
+        </div>
+        <div class="section-card-body">
+            {% if debtors %}
+                {% for b in debtors %}
+                <div class="debtor-item">
+                    <div>
+                        <div class="debtor-name">{{ b.passenger }}</div>
+                        <div class="text-sm" style="color:#94a3b8;">{{ b.booking_code }}</div>
+                    </div>
+                    <div class="debtor-amount">{{ b.remaining_amount }} تومان</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <div class="icon">🎉</div>
+                    <p>بدهکاری وجود ندارد!</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
 
 </div>
 
-<hr>
-<br>
-<br>
-
-<h3>
-
-آمار کلی
-
-</h3>
-<br>
-
-
-<div class="stats-container">
-
-
-    <div class="stat-card">
-        <h3>مسافران</h3>
-        <p>{{ passenger_count }}</p>
+<!-- Service Sales -->
+<div class="section-card">
+    <div class="section-card-header">
+        <h3>📊 فروش خدمات</h3>
     </div>
-
-    <div class="stat-card">
-        <h3>رزروها</h3>
-        <p>{{ booking_count }}</p>
-    </div>
-
-    <div class="stat-card">
-        <h3>کل هزینه ها</h3>
-        <p>{{ total_expenses }}</p>
-    </div>
-
-    <div class="stat-card">
-        <h3>کل فروش</h3>
-        <p>{{ total_sales }}</p>
-    </div>
-
-    <div class="stat-card">
-        <h3>دریافتی</h3>
-        <p>{{ total_payments }}</p>
-    </div>
-
-    <div class="stat-card">
-        <h3>استرداد</h3>
-        <p>{{ total_refunds }}</p>
-    </div>
-
-    <div class="stat-card">
-        <h3>بدهی مشتریان</h3>
-        <p>{{ total_debts }}</p>
-    </div>
-
-    <div class="stat-card">
-        <h3>سود خالص</h3>
-        <p>{{ net_profit }}</p>
+    <div class="section-card-body">
+        <div class="service-cards">
+            <div class="service-card-mini">
+                <div class="service-icon">🗺️</div>
+                <div class="service-count">{{ tour_sales }}</div>
+                <div class="service-name">تورها</div>
+            </div>
+            <div class="service-card-mini">
+                <div class="service-icon">✈️</div>
+                <div class="service-count">{{ flight_sales }}</div>
+                <div class="service-name">پروازها</div>
+            </div>
+            <div class="service-card-mini">
+                <div class="service-icon">🏨</div>
+                <div class="service-count">{{ accommodation_sales }}</div>
+                <div class="service-name">اقامتگاه</div>
+            </div>
+            <div class="service-card-mini">
+                <div class="service-icon">🛂</div>
+                <div class="service-count">{{ visa_sales }}</div>
+                <div class="service-name">ویزا</div>
+            </div>
+        </div>
     </div>
 </div>
-
-<hr>
-
-<h3>
-
-فروش خدمات
-
-</h3>
-
-<table border="1" width="100%" cellpadding="10">
-
-<tr>
-
-    <th>خدمت</th>
-
-    <th>تعداد فروش</th>
-
-    <th>مبلغ فروش</th>
-
-</tr>
-
-<tr>
-
-    <td>تور</td>
-
-    <td>{{ tour_sales }}</td>
-
-    <td>{{ tour_amount }}</td>
-
-</tr>
-
-<tr>
-
-    <td>پرواز</td>
-
-    <td>{{ flight_sales }}</td>
-
-    <td>{{ flight_amount }}</td>
-
-</tr>
-
-<tr>
-
-    <td>اقامتگاه</td>
-
-    <td>{{ accommodation_sales }}</td>
-
-    <td>{{ accommodation_amount }}</td>
-
-</tr>
-
-<tr>
-
-    <td>ویزا</td>
-
-    <td>{{ visa_sales }}</td>
-
-    <td>{{ visa_amount }}</td>
-
-</tr>
-
-</table>
-
-<hr>
-
-<h3>
-
-لیست بدهکاران 
-
-</h3>
-
-<table border="1" width="100%" cellpadding="10">
-
-<tr>
-
-    <th>مسافر</th>
-
-    <th>کد رزرو</th>
-
-    <th>بدهی</th>
-
-</tr>
-
-{% for booking in debtors %}
-
-<tr>
-
-    <td>
-
-        {{ booking.passenger }}
-
-    </td>
-
-    <td>
-
-        {{ booking.booking_code }}
-
-    </td>
-
-    <td>
-
-        {{ booking.remaining_amount }}
-
-    </td>
-
-</tr>
-
-{% empty %}
-
-<tr>
-
-    <td colspan="3">
-
-        بدهکاری وجود ندارد
-
-    </td>
-
-</tr>
-
-{% endfor %}
-
-</table>
 
 {% endblock %}

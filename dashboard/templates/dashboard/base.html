@@ -4,180 +4,189 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        {% block title %}
-        داشبورد
-        {% endblock %}
+        {% block title %}پنل مدیریت - آژانس هواپیمایی ورزان گشت{% endblock %}
     </title>
-
-    <link rel="stylesheet"
-          href="{% static 'dashboard/css/base.css' %}">
-
-
-
+    <meta name="description" content="پنل مدیریت آژانس هواپیمایی ورزان گشت">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'dashboard/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
     {% block css %}
     <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
-    {% endblock %}      
+    {% endblock %}
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>
 
 <div class="layout">
 
-    <aside class="sidebar">
-
-        <div class="logo">
-            آژانس مسافرتی
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <div class="logo-icon">✈️</div>
+            <div class="logo-text">
+                <span class="logo-name">ورزان گشت</span>
+                <span class="logo-sub">آژانس هواپیمایی</span>
+            </div>
         </div>
-
-        <ul>
-
+        
+        <ul class="sidebar-menu">
             <li>
-                <a href="{% url 'dashboard:dashboard' %}">
-                    داشبورد
+                <a href="{% url 'dashboard:dashboard' %}" class="{% if request.path == '/dashboard/' %}active{% endif %}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>داشبورد</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:passengers' %}">
-                    مسافران
+                <a href="{% url 'dashboard:passengers' %}" class="{% if 'passengers' in request.path %}active{% endif %}">
+                    <i class="fas fa-users"></i>
+                    <span>مسافران</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:bookings' %}">
-                    رزروها
+                <a href="{% url 'dashboard:bookings' %}" class="{% if 'bookings' in request.path %}active{% endif %}">
+                    <i class="fas fa-file-alt"></i>
+                    <span>رزروها</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:tour_list' %}">
-                    تورها
+                <a href="{% url 'dashboard:tour_list' %}" class="{% if 'tours' in request.path %}active{% endif %}">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>تورها</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:accommodation_list' %}">
-                 اقامتگاه‌ها
+                <a href="{% url 'dashboard:accommodation_list' %}" class="{% if 'accommodation' in request.path %}active{% endif %}">
+                    <i class="fas fa-hotel"></i>
+                    <span>اقامتگاه‌ها</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:visa_list' %}">
-                     ویزاها
+                <a href="{% url 'dashboard:flight_list' %}" class="{% if 'flight' in request.path %}active{% endif %}">
+                    <i class="fas fa-plane"></i>
+                    <span>پروازها</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:flight_list' %}">
-                 پروازها
+                <a href="{% url 'dashboard:visa_list' %}" class="{% if 'visa' in request.path %}active{% endif %}">
+                    <i class="fas fa-passport"></i>
+                    <span>ویزاها</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:payment_list' %}">
-                    پرداخت‌ها
+                <a href="{% url 'dashboard:payment_list' %}" class="{% if 'payment' in request.path %}active{% endif %}">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>پرداخت‌ها</span>
                 </a>
             </li>
-
-
             <li>
-                <a href="{% url 'dashboard:expense_list' %}">
-                     هزینه‌ها
+                <a href="{% url 'dashboard:expense_list' %}" class="{% if 'expense' in request.path %}active{% endif %}">
+                    <i class="fas fa-receipt"></i>
+                    <span>هزینه‌ها</span>
                 </a>
             </li>
-
-
             <li>
-                <a href="{% url 'dashboard:refund_list' %}">
-                 استردادها
+                <a href="{% url 'dashboard:refund_list' %}" class="{% if 'refund' in request.path %}active{% endif %}">
+                    <i class="fas fa-undo"></i>
+                    <span>استردادها</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:country_list' %}">
-                    کشورها
+                <a href="{% url 'dashboard:country_list' %}" class="{% if 'country' in request.path %}active{% endif %}">
+                    <i class="fas fa-globe"></i>
+                    <span>کشورها</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:city_list' %}">
-                    شهرها
+                <a href="{% url 'dashboard:city_list' %}" class="{% if 'city' in request.path %}active{% endif %}">
+                    <i class="fas fa-city"></i>
+                    <span>شهرها</span>
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'dashboard:financial_report' %}">
-                    گزارش مالی
+                <a href="{% url 'dashboard:financial_report' %}" class="{% if 'financial' in request.path %}active{% endif %}">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>گزارش مالی</span>
                 </a>
             </li>
-
         </ul>
-
+        
+        <div class="sidebar-footer">
+            <small>© ۱۴۰۵ ورزان گشت</small>
+        </div>
     </aside>
 
+    <!-- Main Content -->
     <main class="main-content">
-
+        <!-- Top Header -->
         <header class="header">
-
-            <div>
-                پنل مدیریت
-            </div>
-
-            <div>
-                <div style="display:flex;gap:10px;align-items:center;">
-
-                    <form method="get"
-                        action="{% url 'dashboard:global_search' %}">
-
-                        <input
-                            type="text"
-                            name="q"
-                            placeholder="جستجوی مسافر، رزرو، پاسپورت..."
-                            style="padding:6px 10px;width:250px;"
-                        >
-
-                        <button type="submit">
-                         جستجو
-                        </button>
-
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-search">
+                    <form method="get" action="{% url 'dashboard:global_search' %}">
+                        <input type="text" name="q" placeholder="جستجوی مسافر، رزرو، پاسپورت..." 
+                               value="{{ request.GET.q|default:'' }}">
+                        <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
-
-                    <span>
-                    {{ request.user.username }}
-                    </span>
-
+                </div>
             </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">{{ request.user.username }}</span>
+                        <span class="user-role">مدیر</span>
+                    </div>
+                </div>
+                <a href="{% url 'dashboard:logout' %}" class="logout-btn" onclick="return confirm('آیا مطمئن هستید؟')">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>خروج</span>
+                </a>
             </div>
-
         </header>
 
+        <!-- Content Section -->
         <section class="content">
-
+            <!-- Messages -->
             {% if messages %}
-
-                {% for message in messages %}
-
-                    <p>
-                        {{ message }}
-                    </p>
-
-                {% endfor %}
-
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            <i class="fas {% if message.tags == 'success' %}fa-check-circle{% elif message.tags == 'error' %}fa-exclamation-circle{% elif message.tags == 'warning' %}fa-exclamation-triangle{% else %}fa-info-circle{% endif %}"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
             {% endif %}
-
+            
+            <!-- Page Title -->
+            {% block page_title %}{% endblock %}
+            
+            <!-- Content Block -->
             {% block content %}
-           
             {% endblock %}
-
         </section>
-
     </main>
-
 </div>
+
+<script src="{% static 'dashboard/js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
 
 </body>
 </html>

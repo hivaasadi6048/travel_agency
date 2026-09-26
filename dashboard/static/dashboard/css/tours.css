@@ -1,0 +1,114 @@
+/* --- Tours Styles --- */
+.tour-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    margin-bottom: 25px;
+}
+
+.tour-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.tour-banner {
+    background: linear-gradient(135deg, #1a237e, #5c6bc0);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.tour-banner h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.tour-banner .destination {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.tour-details {
+    padding: 25px;
+}
+
+.tour-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.tour-meta-item {
+    text-align: center;
+    padding: 15px;
+    background: #f5f7ff;
+    border-radius: 12px;
+}
+
+.tour-meta-item .icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.tour-meta-item .label {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.tour-meta-item .value {
+    font-weight: bold;
+    color: #1a237e;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+.tour-price {
+    background: #f0f3ff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.tour-price .amount {
+    font-size: 32px;
+    font-weight: bold;
+    color: #dc2626;
+}
+
+.tour-price .per-person {
+    font-size: 14px;
+    color: #666;
+}
+
+.tour-flights-list,
+.tour-accommodations-list {
+    margin-top: 20px;
+}
+
+.tour-flight-item,
+.tour-accommodation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.tour-status {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-open { background: #e8f5e9; color: #2e7d32; }
+.status-full { background: #ffebee; color: #c62828; }
+.status-running { background: #e3f2fd; color: #1565c0; }
+.status-cancelled { background: #f3e5f5; color: #7b1fa2; }
+.status-finished { background: #eceff1; color: #455a64; }

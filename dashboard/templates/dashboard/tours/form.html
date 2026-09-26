@@ -1,0 +1,11 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}افزودن تور{% endblock %}
+{% block content %}
+<h2>افزودن تور جدید</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-booking">ایجاد تور</button>
+    <a href="{% url 'dashboard:tour_list' %}" class="btn-danger">انصراف</a>
+</form>
+{% endblock %}

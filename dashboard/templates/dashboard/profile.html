@@ -1,14 +1,42 @@
 {% extends 'dashboard/base.html' %}
 {% block title %}پروفایل{% endblock %}
-{% block content %}
+{% block page_title %}
 <h2>پروفایل کاربری</h2>
-<div class="profile-header">
-    <h3>{{ user.username }}</h3>
-    <a class="btn-edit" href="{% url 'dashboard:change_password' %}">تغییر رمز</a>
-</div>
-<div class="info-card">
-    <p><strong>نام کاربری:</strong> {{ user.username }}</p>
-    <p><strong>ایمیل:</strong> {{ user.email }}</p>
-    <p><strong>تاریخ عضویت:</strong> {{ user.date_joined|date:'Y/m/d' }}</p>
+{% endblock %}
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar-lg">
+                <i class="fas fa-user"></i>
+            </div>
+            <div>
+                <h3>{{ user.username }}</h3>
+                <p>مدیر سیستم</p>
+            </div>
+        </div>
+        <div class="profile-info-grid">
+            <div class="profile-info-item">
+                <label>نام کاربری</label>
+                <p>{{ user.username }}</p>
+            </div>
+            <div class="profile-info-item">
+                <label>ایمیل</label>
+                <p>{{ user.email|default:'-'- }}</p>
+            </div>
+            <div class="profile-info-item">
+                <label>تاریخ عضویت</label>
+                <p>{{ user.date_joined|date:'Y/m/d' }}</p>
+            </div>
+        </div>
+        <div class="profile-actions">
+            <a href="{% url 'dashboard:change_password' %}" class="btn-booking">
+                <i class="fas fa-key"></i> تغییر رمز
+            </a>
+            <a href="{% url 'dashboard:profile' %}" class="btn-warning">
+                <i class="fas fa-edit"></i> ویرایش پروفایل
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}

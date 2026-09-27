@@ -335,11 +335,11 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 /* ====== GLOBAL FORM STYLES (for templates without .form-wrapper) ====== */
 .content form {
     background: white; border-radius: var(--border-radius);
-    padding: 30px; box-shadow: var(--shadow-md);
-    max-width: 550px; margin: 0 auto; width: 100%;
+    padding: 35px; box-shadow: var(--shadow-md);
+    max-width: 700px; margin: 0 auto; width: 100%;
 }
 .content h2 {
-    font-size: 26px; color: var(--gray-900); font-weight: 700;
+    font-size: 28px; color: var(--gray-900); font-weight: 700;
     margin-bottom: 25px; padding-bottom: 15px;
     border-bottom: 3px solid var(--primary); display: inline-block;
 }
@@ -468,6 +468,37 @@ textarea.form-control { min-height: 100px; resize: vertical; }
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(26,35,126,0.4);
 }
+
+/* ====== TABLE ACTION BUTTONS ====== */
+.action-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.action-btn {
+    padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    font-family: inherit; cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    transition: all 0.3s ease; border: 2px solid transparent;
+    min-width: 40px;
+}
+.action-btn.view {
+    background: var(--info); color: white; border-color: #2563eb;
+}
+.action-btn.view:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(37,99,235,0.3); }
+.action-btn.edit {
+    background: var(--warning); color: white; border-color: #f59e0b;
+}
+.action-btn.edit:hover { background: #d97706; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(245,158,11,0.3); }
+.action-btn.delete {
+    background: var(--danger); color: white; border-color: #dc2626;
+}
+.action-btn.delete:hover { background: #b91c1c; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(220,38,38,0.3); }
+.action-btn.show {
+    background: var(--primary); color: white; border-color: var(--primary);
+}
+.action-btn.show:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 3px 10px rgba(26,35,126,0.3); }
+.action-btn i { font-size: 14px; }
+
+/* Table list styling */
+.content table .actions { text-align: center; white-space: nowrap; }
+.content table .actions .action-btn { margin: 2px; }
 
 /* ====== BUTTONS ====== */
 .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }

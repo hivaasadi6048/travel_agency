@@ -211,6 +211,22 @@ table tr:last-child td { border-bottom: none; }
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
 }
 .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(26,35,126,0.05); }
+.btn-add {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: white !important; padding: 14px 30px;
+    border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700; font-family: inherit;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(22,163,74,0.3);
+}
+.btn-add:hover {
+    background: linear-gradient(135deg, #15803d, #16a34a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(22,163,74,0.4);
+}
+
 .btn-sm { padding: 6px 14px; font-size: 12px; }
 .btn-lg { padding: 14px 30px; font-size: 16px; }
 
@@ -325,14 +341,14 @@ textarea.form-control { min-height: 100px; resize: vertical; }
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     transition: all 0.3s ease; border: 2px solid transparent;
 }
-.action-btn.view { background: #00CED1; color: white; border-color: #00CED1; }
-.action-btn.view:hover { background: #008B8B; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+.action-btn.view { background: #00CED1 !important; color: white !important; border-color: #00CED1 !important; }
+.action-btn.view:hover { background: #008B8B !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,206,209,0.3); }
 .action-btn.edit { background: var(--warning); color: white; border-color: #f59e0b; }
 .action-btn.edit:hover { background: #d97706; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245,158,11,0.3); }
 .action-btn.delete { background: var(--danger); color: white; border-color: #dc2626; }
 .action-btn.delete:hover { background: #b91c1c; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(220,38,38,0.3); }
-.action-btn.show { background: #00CED1; color: white; border-color: #00CED1; }
-.action-btn.show:hover { background: #008B8B; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(26,35,126,0.3); }
+.action-btn.show { background: #00CED1 !important; color: white !important; border-color: #00CED1 !important; }
+.action-btn.show:hover { background: #008B8B !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(26,35,126,0.3); }
 .action-btn i { font-size: 14px; }
 
 /* Raw action links in list tables */
@@ -344,12 +360,12 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 .content a[href*="edit"]:hover { background: #d97706; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(245,158,11,0.3); }
 .content a[href*="detail"],
 .content a[href*="show"] {
-    padding: 8px 20px; background: #00CED1; color: white;
+    padding: 10px 24px !important; background: #00CED1 !important; color: white !important;
     border-radius: 10px; font-size: 14px; font-weight: 700;
     text-decoration: none; transition: all 0.3s ease; display: inline-block; margin: 2px;
 }
 .content a[href*="detail"]:hover,
-.content a[href*="show"]:hover { background: #008B8B; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,206,209,0.3); }
+.content a[href*="show"]:hover { background: #008B8B !important; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,206,209,0.3); }
 .content a[href*="delete"] {
     padding: 8px 20px; background: var(--danger); color: white;
     border-radius: 10px; font-size: 14px; font-weight: 700;

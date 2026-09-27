@@ -500,6 +500,30 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 .content table .actions { text-align: center; white-space: nowrap; }
 .content table .actions .action-btn { margin: 2px; }
 
+/* Raw action links in list tables (fallback) */
+.content a[href*="edit"],
+.content a[href*="detail"],
+.content a[href*="show"] {
+    padding: 6px 16px; background: var(--primary); color: white;
+    border-radius: 8px; font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: all 0.3s ease;
+    display: inline-block; margin: 2px;
+}
+.content a[href*="edit"]:hover,
+.content a[href*="detail"]:hover,
+.content a[href*="show"]:hover {
+    background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 3px 10px rgba(26,35,126,0.3);
+}
+.content a[href*="delete"] {
+    padding: 6px 16px; background: var(--danger); color: white;
+    border-radius: 8px; font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: all 0.3s ease;
+    display: inline-block; margin: 2px;
+}
+.content a[href*="delete"]:hover {
+    background: #b91c1c; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(220,38,38,0.3);
+}
+
 /* ====== BUTTONS ====== */
 .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
 .badge-primary { background: #e3f2fd; color: #1565c0; }

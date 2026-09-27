@@ -78,6 +78,19 @@
             background-position: left 15px center;
         }
         .register-card .form-group textarea { padding-left: 15px; min-height: 70px; resize: vertical; }
+        .password-toggle {
+            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            cursor: pointer; color: #94a3b8; font-size: 15px; z-index: 2;
+            background: none; border: none; padding: 0;
+        }
+        .password-toggle:hover { color: #1a237e; }
+        .password-toggle-wrapper { position: relative; }
+        .password-toggle-wrapper input { padding-left: 42px !important; }
+        .field-error {
+            color: #b71c1c; font-size: 11px; margin-top: 4px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .field-error i { font-size: 10px; }
         .register-btn {
             width: 100%; padding: 13px;
             background: linear-gradient(135deg, #1a237e, #3949ab);
@@ -118,6 +131,11 @@
         }
         .alert-success-msg i { font-size: 16px; }
         .password-hint { font-size: 11px; color: #94a3b8; margin-top: 3px; }
+        .password-match-ok {
+            color: #1b5e20; font-size: 11px; margin-top: 3px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .password-match-ok i { font-size: 10px; }
         @media (max-width: 480px) {
             .register-card { padding: 22px 18px; border-radius: 16px; }
             .register-logo h2 { font-size: 20px; }
@@ -150,7 +168,7 @@
                 {% endfor %}
             {% endif %}
 
-            <form method="post">
+            <form method="post" id="registerForm">
                 {% csrf_token %}
                 <div class="form-group">
                     <label>نام کاربری</label>
@@ -158,6 +176,11 @@
                         <i class="fas fa-user"></i>
                         {{ form.username }}
                     </div>
+                    {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                            <div class="field-error"><i class="fas fa-times-circle"></i> {{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label>ایمیل</label>
@@ -165,21 +188,47 @@
                         <i class="fas fa-envelope"></i>
                         {{ form.email }}
                     </div>
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <div class="field-error"><i class="fas fa-times-circle"></i> {{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label>رمز عبور</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-lock"></i>
-                        {{ form.password1 }}
+                    <div class="password-toggle-wrapper">
+                        <button type="button" class="password-toggle" onclick="togglePassword('id_password1', this)">
+                            <i class="fas fa-eye" id="icon_password1"></i>
+                        </button>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            {{ form.password1 }}
+                        </div>
                     </div>
                     <span class="password-hint">حداقل 8 کاراکتر</span>
+                    {% if form.password1.errors %}
+                        {% for error in form.password1.errors %}
+                            <div class="field-error"><i class="fas fa-times-circle"></i> {{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label>تکرار رمز عبور</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-lock"></i>
-                        {{ form.password2 }}
+                    <div class="password-toggle-wrapper">
+                        <button type="button" class="password-toggle" onclick="togglePassword('id_password2', this)">
+                            <i class="fas fa-eye" id="icon_password2"></i>
+                        </button>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            {{ form.password2 }}
+                        </div>
                     </div>
+                    <div id="passwordMatchMsg"></div>
+                    {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                            <div class="field-error"><i class="fas fa-times-circle"></i> {{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <button type="submit" class="register-btn">
                     <i class="fas fa-user-plus"></i>
@@ -193,5 +242,42 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function togglePassword(fieldId, btn) {
+            const field = document.getElementById(fieldId);
+            const icon = btn.querySelector('i');
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        const pw1 = document.getElementById('id_password1');
+        const pw2 = document.getElementById('id_password2');
+        const matchMsg = document.getElementById('passwordMatchMsg');
+
+        function checkPasswordMatch() {
+            if (pw1.value && pw2.value) {
+                if (pw1.value === pw2.value) {
+                    matchMsg.innerHTML = '<span class="password-match-ok"><i class="fas fa-check-circle"></i> رمزها هم‌خوانی دارند</span>';
+                    matchMsg.style.color = '#1b5e20';
+                } else {
+                    matchMsg.innerHTML = '<span style="color:#b71c1c;font-size:11px;margin-top:3px;display:flex;align-items:center;gap:4px;"><i class="fas fa-times-circle"></i> رمزها با هم تفاوت دارند</span>';
+                    matchMsg.style.color = '#b71c1c';
+                }
+            } else {
+                matchMsg.innerHTML = '';
+            }
+        }
+
+        pw1.addEventListener('input', checkPasswordMatch);
+        pw2.addEventListener('input', checkPasswordMatch);
+    </script>
 </body>
 </html>

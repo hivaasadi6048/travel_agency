@@ -26,111 +26,102 @@
         }
         .register-container {
             position: relative; z-index: 2;
-            width: 100%; max-width: 480px; padding: 0 20px;
+            width: 100%; max-width: 380px; padding: 0 15px;
         }
         .register-card {
-            background: white; border-radius: 24px; padding: 45px 40px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-            animation: fadeInUp 0.6s ease;
+            background: white; border-radius: 20px; padding: 30px 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.5s ease;
         }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .register-logo {
-            text-align: center; margin-bottom: 35px;
-        }
+        .register-logo { text-align: center; margin-bottom: 25px; }
         .register-logo img {
-            width: 70px; height: 70px; border-radius: 18px;
+            width: 60px; height: 60px; border-radius: 16px;
             object-fit: contain;
             box-shadow: 0 4px 15px rgba(26,35,126,0.3);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
-        .register-logo h2 { font-size: 24px; color: #1a237e; font-weight: 800; }
-        .register-logo p { font-size: 14px; color: #94a3b8; margin-top: 5px; }
-        .form-group { margin-bottom: 22px; }
-        .form-group label {
-            display: block; font-size: 14px; font-weight: 600;
-            color: #334155; margin-bottom: 8px;
+        .register-logo h2 { font-size: 22px; color: #1a237e; font-weight: 800; }
+        .register-logo p { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+        .register-card .form-group { margin-bottom: 16px; }
+        .register-card .form-group label {
+            display: block; font-size: 13px; font-weight: 600;
+            color: #334155; margin-bottom: 6px;
         }
-        .form-group .input-wrapper { position: relative; }
-        .form-group .input-wrapper i {
-            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-            color: #94a3b8; font-size: 16px;
+        .register-card .form-group .input-wrapper { position: relative; }
+        .register-card .form-group .input-wrapper i {
+            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            color: #94a3b8; font-size: 15px; z-index: 1;
         }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%; padding: 14px 15px 14px 45px;
-            border: 2px solid #e2e8f0; border-radius: 12px;
-            font-size: 15px; font-family: inherit; transition: all 0.3s ease;
+        .register-card .form-group input,
+        .register-card .form-group select {
+            width: 100%; padding: 12px 14px 12px 42px;
+            border: 2px solid #e2e8f0; border-radius: 10px;
+            font-size: 14px; font-family: inherit; transition: all 0.3s ease;
             background: #f8fafc; direction: rtl; color: #334155;
         }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .register-card .form-group input:focus,
+        .register-card .form-group select:focus {
             border-color: #1a237e; outline: none;
             box-shadow: 0 0 0 4px rgba(26,35,126,0.1);
             background: white;
         }
-        .form-group input::placeholder,
-        .form-group textarea::placeholder { color: #cbd5e1; }
-        .form-group select {
-            cursor: pointer; appearance: none;
-            padding-left: 45px;
+        .register-card .form-group input::placeholder,
+        .register-card .form-group textarea::placeholder { color: #cbd5e1; }
+        .register-card .form-group select {
+            cursor: pointer; appearance: none; padding-left: 42px;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: left 15px center;
         }
-        .form-group textarea { padding-left: 15px; min-height: 80px; resize: vertical; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .register-card .form-group textarea { padding-left: 15px; min-height: 70px; resize: vertical; }
         .register-btn {
-            width: 100%; padding: 15px;
+            width: 100%; padding: 13px;
             background: linear-gradient(135deg, #1a237e, #3949ab);
-            color: white; border: none; border-radius: 12px;
-            font-size: 17px; font-weight: 700; font-family: inherit;
+            color: white; border: none; border-radius: 10px;
+            font-size: 16px; font-weight: 700; font-family: inherit;
             cursor: pointer; transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            margin-top: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-top: 8px;
         }
         .register-btn:hover {
             background: linear-gradient(135deg, #0d1452, #1a237e);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(26,35,126,0.4);
+            box-shadow: 0 6px 20px rgba(26,35,126,0.4);
         }
-        .register-btn i { font-size: 18px; }
+        .register-btn i { font-size: 16px; }
         .register-footer {
-            text-align: center; margin-top: 25px;
-            padding-top: 20px; border-top: 1px solid #e2e8f0;
+            text-align: center; margin-top: 18px;
+            padding-top: 15px; border-top: 1px solid #e2e8f0;
         }
         .register-footer a {
-            color: #1a237e; text-decoration: none; font-size: 14px; font-weight: 600;
+            color: #1a237e; text-decoration: none; font-size: 13px; font-weight: 600;
             transition: color 0.3s;
         }
         .register-footer a:hover { color: #3949ab; text-decoration: underline; }
-        .register-footer p { color: #94a3b8; font-size: 13px; margin-top: 10px; }
+        .register-footer p { color: #94a3b8; font-size: 12px; margin-top: 8px; }
         .alert-msg {
-            background: #ffebee; color: #b71c1c; padding: 12px 16px;
-            border-radius: 10px; font-size: 14px; margin-bottom: 20px;
-            display: flex; align-items: center; gap: 10px;
+            background: #ffebee; color: #b71c1c; padding: 10px 14px;
+            border-radius: 10px; font-size: 13px; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 8px;
             border: 1px solid #ffcdd2;
         }
-        .alert-msg i { font-size: 18px; }
+        .alert-msg i { font-size: 16px; }
         .alert-success-msg {
-            background: #e8f5e9; color: #1b5e20; padding: 12px 16px;
-            border-radius: 10px; font-size: 14px; margin-bottom: 20px;
-            display: flex; align-items: center; gap: 10px;
+            background: #e8f5e9; color: #1b5e20; padding: 10px 14px;
+            border-radius: 10px; font-size: 13px; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 8px;
             border: 1px solid #c8e6c9;
         }
-        .alert-success-msg i { font-size: 18px; }
-        .password-hint {
-            font-size: 12px; color: #94a3b8; margin-top: 4px;
-        }
+        .alert-success-msg i { font-size: 16px; }
+        .password-hint { font-size: 11px; color: #94a3b8; margin-top: 3px; }
         @media (max-width: 480px) {
-            .register-card { padding: 30px 20px; border-radius: 20px; }
+            .register-card { padding: 22px 18px; border-radius: 16px; }
             .register-logo h2 { font-size: 20px; }
             .register-btn { font-size: 15px; }
-            .form-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -139,7 +130,7 @@
         <div class="register-card">
             <div class="register-logo">
                 <img src="{% static 'dashboard/images/Varzan_Gasht_Transparent.png' %}" alt="ورزان گشت">
-                <h2>ثبت‌نام در سیستم</h2>
+                <h2>ثبت‌نام</h2>
                 <p>آژانس هواپیمایی ورزان گشت</p>
             </div>
 
@@ -175,22 +166,6 @@
                         {{ form.email }}
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>شماره تلفن</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-phone"></i>
-                            {{ form.phone }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>کد ملی</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-id-card"></i>
-                            {{ form.national_code }}
-                        </div>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label>رمز عبور</label>
                     <div class="input-wrapper">
@@ -204,13 +179,6 @@
                     <div class="input-wrapper">
                         <i class="fas fa-lock"></i>
                         {{ form.password2 }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>آدرس</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-map-marker-alt"></i>
-                        {{ form.address }}
                     </div>
                 </div>
                 <button type="submit" class="register-btn">

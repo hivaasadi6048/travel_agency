@@ -31,7 +31,8 @@ from .forms import (
     RefundForm,
     ExpenseForm,
     DocumentForm,
-    PassportForm
+    PassportForm,
+    CustomAuthenticationForm,
 )
 
 
@@ -550,28 +551,20 @@ def login_view(request):
         return redirect('dashboard:dashboard')
 
     if request.method == 'POST':
-
-        username = request.POST.get('username')
-
-        password = request.POST.get('password')
-
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
-
-        if user:
-
+        form = CustomAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
             login(request, user)
-
-            return redirect(
-                'dashboard:dashboard'
-            )
+            return redirect('dashboard:dashboard')
+        else:
+            messages.error(request, 'نام کاربری یا رمز عبور اشتباه است.')
+    else:
+        form = CustomAuthenticationForm()
 
     return render(
         request,
-        'dashboard/login.html'
+        'dashboard/login.html',
+        {'form': form}
     )
     
 

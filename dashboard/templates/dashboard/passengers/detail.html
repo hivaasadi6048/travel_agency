@@ -149,14 +149,15 @@
 
             <br><br>
 
-            <a href="{{ document.file.url }}" target="_blank">
+<a href="{{ document.file.url }}" target="_blank">
 
-                <img
-                    src="{{ document.file.url }}"
-                    class="document-image"
-                >
+                 <img
+                     src="{{ document.file.url }}"
+                     class="document-image"
+                     onerror="this.style.display='none'"
+                 >
 
-            </a>
+             </a>
 
             <br><br>
 
@@ -393,6 +394,7 @@
                     src="{{ document.file.url }}"
                     width="120"
                     style="border-radius:8px;"
+                    onerror="this.style.display='none'"
                 >
 
             </a>

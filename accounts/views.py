@@ -32,17 +32,17 @@ def logout_view(request):
     return render(request, 'dashboard/logout.html')
 
 def register_view(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and not request.user.is_staff:
+        return redirect('accounts:login')
+    if request.user.is_authenticated and request.user.is_staff:
         return redirect('dashboard:dashboard')
     
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.backend = 'django.contrib.auth.backends.ModelBackend'
-            login(request, user)
-            messages.success(request, 'ثبت‌نام با موفقیت انجام شد.')
-            return redirect('dashboard:dashboard')
+            messages.success(request, 'ثبت‌نام با موفقیت انجام شد. لطفاً منتظر تأیید ادمین بمانید.')
+            return redirect('accounts:login')
         else:
             messages.error(request, 'خطا در ثبت‌نام. لطفاً مجدداً تلاش کنید.')
     else:

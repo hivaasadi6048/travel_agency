@@ -325,14 +325,14 @@ textarea.form-control { min-height: 100px; resize: vertical; }
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     transition: all 0.3s ease; border: 2px solid transparent;
 }
-.action-btn.view { background: var(--info); color: white; border-color: #2563eb; }
-.action-btn.view:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+.action-btn.view { background: #00CED1; color: white; border-color: #00CED1; }
+.action-btn.view:hover { background: #008B8B; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
 .action-btn.edit { background: var(--warning); color: white; border-color: #f59e0b; }
 .action-btn.edit:hover { background: #d97706; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245,158,11,0.3); }
 .action-btn.delete { background: var(--danger); color: white; border-color: #dc2626; }
 .action-btn.delete:hover { background: #b91c1c; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(220,38,38,0.3); }
-.action-btn.show { background: var(--primary); color: white; border-color: var(--primary); }
-.action-btn.show:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(26,35,126,0.3); }
+.action-btn.show { background: #00CED1; color: white; border-color: #00CED1; }
+.action-btn.show:hover { background: #008B8B; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(26,35,126,0.3); }
 .action-btn i { font-size: 14px; }
 
 /* Raw action links in list tables */
@@ -344,12 +344,12 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 .content a[href*="edit"]:hover { background: #d97706; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(245,158,11,0.3); }
 .content a[href*="detail"],
 .content a[href*="show"] {
-    padding: 8px 20px; background: var(--info); color: white;
+    padding: 8px 20px; background: #00CED1; color: white;
     border-radius: 10px; font-size: 14px; font-weight: 700;
     text-decoration: none; transition: all 0.3s ease; display: inline-block; margin: 2px;
 }
 .content a[href*="detail"]:hover,
-.content a[href*="show"]:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(37,99,235,0.3); }
+.content a[href*="show"]:hover { background: #008B8B; transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,206,209,0.3); }
 .content a[href*="delete"] {
     padding: 8px 20px; background: var(--danger); color: white;
     border-radius: 10px; font-size: 14px; font-weight: 700;

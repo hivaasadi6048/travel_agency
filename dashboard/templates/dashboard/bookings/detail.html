@@ -62,9 +62,7 @@
 
 <h3>هزینه‌های ثبت شده</h3>
 
-<a href="{% url 'dashboard:add_booking_expense' booking.id %}">
-➕ ثبت هزینه برای این رزرو
-</a>
+<a href="{% url 'dashboard:add_booking_expense' booking.id %}" class="btn btn-add">➕ ثبت هزینه برای این رزرو</a>
 
 <table border="1" width="100%" cellpadding="10">
 
@@ -179,27 +177,19 @@
 
 <hr>
 
-<a href="{% url 'dashboard:add_tour_to_booking' booking.id %}">
-➕ افزودن تور
-</a>
+<a href="{% url 'dashboard:add_tour_to_booking' booking.id %}" class="btn btn-add">➕ افزودن تور</a>
 
 <br><br>
 
-<a href="{% url 'dashboard:add_flight_to_booking' booking.id %}">
-➕ افزودن پرواز
-</a>
+<a href="{% url 'dashboard:add_flight_to_booking' booking.id %}" class="btn btn-add">➕ افزودن پرواز</a>
 
 <br><br>
 
-<a href="{% url 'dashboard:add_accommodation_to_booking' booking.id %}">
-➕ افزودن اقامتگاه
-</a>
+<a href="{% url 'dashboard:add_accommodation_to_booking' booking.id %}" class="btn btn-add">➕ افزودن اقامتگاه</a>
 
 <br><br>
 
-<a href="{% url 'dashboard:add_visa_to_booking' booking.id %}">
-➕ افزودن ویزا
-</a>
+<a href="{% url 'dashboard:add_visa_to_booking' booking.id %}" class="btn btn-add">➕ افزودن ویزا</a>
 
 <hr>
 

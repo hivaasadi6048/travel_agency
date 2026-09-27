@@ -14,7 +14,7 @@ def login_view(request):
         form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('dashboard:dashboard')
         else:
             messages.error(request, 'نام کاربری یا رمز عبور اشتباه است.')
@@ -39,6 +39,7 @@ def register_view(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
             messages.success(request, 'ثبت‌نام با موفقیت انجام شد.')
             return redirect('dashboard:dashboard')

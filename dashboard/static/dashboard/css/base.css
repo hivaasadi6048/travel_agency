@@ -335,7 +335,8 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 /* ====== GLOBAL FORM STYLES (for templates without .form-wrapper) ====== */
 .content form {
     background: white; border-radius: var(--border-radius);
-    padding: 30px; box-shadow: var(--shadow-md); max-width: 900px; margin: 0 auto;
+    padding: 30px; box-shadow: var(--shadow-md);
+    max-width: 550px; margin: 0 auto; width: 100%;
 }
 .content h2 {
     font-size: 26px; color: var(--gray-900); font-weight: 700;
@@ -412,6 +413,60 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 .content .field-error {
     border-color: var(--danger) !important;
     box-shadow: 0 0 0 4px rgba(220,38,38,0.1) !important;
+}
+.content .field-error + .form-help { color: var(--danger); }
+
+/* Submit buttons in forms */
+.content button[type="submit"] {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white; border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700; font-family: inherit;
+    cursor: pointer; transition: all 0.3s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    margin-top: 5px;
+}
+.content button[type="submit"]:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(26,35,126,0.4);
+}
+.content button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Cancel/back links in forms */
+.content a.btn-danger,
+.content a[style*="color:red"],
+.content .btn-danger {
+    padding: 12px 25px;
+    background: #fee2e2; color: var(--danger); border: 2px solid #fecaca;
+    border-radius: 10px; font-size: 14px; font-weight: 600; font-family: inherit;
+    cursor: pointer; text-decoration: none; transition: var(--transition);
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+.content a.btn-danger:hover,
+.content .btn-danger:hover {
+    background: #fecaca; color: #991b1b;
+}
+
+/* Generic buttons in content */
+.content .btn,
+.content input[type="submit"],
+.content input[type="button"] {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white; border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700; font-family: inherit;
+    cursor: pointer; transition: all 0.3s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+}
+.content .btn:hover,
+.content input[type="submit"]:hover,
+.content input[type="button"]:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(26,35,126,0.4);
 }
 
 /* ====== BUTTONS ====== */
@@ -544,6 +599,11 @@ textarea.form-control { min-height: 100px; resize: vertical; }
     .header { padding: 0 15px; }
     .user-details { display: none; }
     .content { padding: calc(var(--header-height) + 15px) 15px 15px; }
+    .content form { padding: 20px; max-width: 100%; }
+    .content h2 { font-size: 22px; }
+    .content button[type="submit"] { width: 100%; justify-content: center; }
+    .content a.btn-danger,
+    .content .btn-danger { width: 100%; justify-content: center; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .stat-card { padding: 15px; }
     .stat-info .stat-number { font-size: 20px; }
@@ -558,6 +618,11 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 
 /* SMALL MOBILE (480px and below) */
 @media (max-width: 480px) {
+    .content form { padding: 15px; }
+    .content h2 { font-size: 20px; }
+    .content button[type="submit"] { padding: 14px; font-size: 16px; }
+    .content a.btn-danger,
+    .content .btn-danger { padding: 14px; }
     .stats-grid { grid-template-columns: 1fr; }
     .booking-items { grid-template-columns: 1fr; }
     .header-right { gap: 10px; }

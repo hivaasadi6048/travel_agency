@@ -227,6 +227,22 @@ table tr:last-child td { border-bottom: none; }
     box-shadow: 0 6px 20px rgba(22,163,74,0.4);
 }
 
+.btn-submit-green {
+    background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+    color: white !important; padding: 14px 35px;
+    border: none; border-radius: 10px;
+    font-size: 16px; font-weight: 700; font-family: inherit;
+    cursor: pointer; transition: all 0.3s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 4px 15px rgba(22,163,74,0.3);
+}
+.btn-submit-green:hover {
+    background: linear-gradient(135deg, #15803d, #16a34a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(22,163,74,0.4);
+}
+
+
 .btn-sm { padding: 6px 14px; font-size: 12px; }
 .btn-lg { padding: 14px 30px; font-size: 16px; }
 
